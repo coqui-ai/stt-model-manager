@@ -1,0 +1,17 @@
+name: Lint checks
+on:
+  pull_request:
+defaults:
+  run:
+    shell: bash
+jobs:
+  pre-commit-hooks:
+    name: Run pre-commit hooks
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: |
+          python .pre-commit-2.13.0.pyz run --all-files
