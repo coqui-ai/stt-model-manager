@@ -32,7 +32,11 @@ def get_server_hostport() -> Tuple[str, int]:
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    host, port = get_server_hostport()
+    return render_template(
+        "index.html",
+        model_zoo_callback_url=f"http://{host}:{port}/install_model",
+    )
 
 
 @app.route("/install_model", methods=["POST"])
