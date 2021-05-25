@@ -2,14 +2,16 @@
 import webbrowser
 from threading import Thread
 
-from .server import start_app
+from .server import get_server_hostport, start_app
 
 
 def main():
-    print("Starting server listening on 0.0.0.0:12345...")
-    thread = Thread(target=start_app)
+    thread = Thread(target=start_app, daemon=True)
     thread.start()
-    webbrowser.open("http://localhost:12345")
+    host, port = get_server_hostport()
+    addr = f"http://{host}:{port}"
+    print(f"Started server listening on {addr}...")
+    webbrowser.open(addr)
     thread.join()
 
 
