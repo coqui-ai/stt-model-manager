@@ -1,3 +1,14 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<a target="_blank" href="https://coqui.ai/models?callback_url={{ model_zoo_callback_url }}">Install model from Coqui STT Model Zoo</a>
+<a href="{{ model_zoo_url }}">Install model from Coqui STT Model Zoo</a>
+<table border="1">
+<thead>
+<tr><th colspan="4">Installed models</th></tr>
+<tr><th>Name</th><th>Language</th><th>Version</th><th>Creator</th></tr>
+</thead>
+<tbody>
+{% for card in installed_models %}
+    <tr><td>{{ card.name }}</td><td>{{ card.language }}</td><td>{{ card.version }}</td><td>{{ card.creator }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
