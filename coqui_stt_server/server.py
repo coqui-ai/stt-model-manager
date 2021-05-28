@@ -87,6 +87,18 @@ def get_progress_for_install(install_id):
     return Response(generate(), mimetype="text/event-stream")
 
 
+#@app.route("/transcribe/<string:model_name>")
+@app.route("/transcribe")
+def transcription_client_page():
+#    # get model info from ModelManager
+#    task = app.config["MODEL_MANAGER"].get_install_task_state(install_id),
+#    # TODO: start WS transcription server in
+#    # a background Thread or Process with selected model
+    return render_template("transcribe.html")
+#                           model_name=task.model_card.name,
+#                           ws_transcription_server_info="foobar")
+
+
 def start_app(host: str = "127.0.0.1", port: Optional[int] = None):
     if not is_debug():
         werkzeug_log = logging.getLogger("werkzeug")
