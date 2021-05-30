@@ -45,7 +45,7 @@ def index():
 
 @app.route("/install_model", methods=["POST"])
 def install_model():
-    model_card = json.loads(request.form["model_card"])
+    model_card = json.loads(request.data)
     print(f"Install model got data: {json.dumps(model_card)}")
     install_id = app.config["MODEL_MANAGER"].download_model(model_card)
     return redirect(url_for("model_install_page", install_id=install_id))
