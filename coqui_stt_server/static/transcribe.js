@@ -1,5 +1,4 @@
 /* Audio recording and streaming demo by Miguel Grinberg.
-
    Adapted from https://webaudiodemos.appspot.com/AudioRecorder
    Copyright 2013 Chris Wilson
 
@@ -26,8 +25,12 @@ var audioInput = null,
 var rafID = null;
 var analyserContext = null;
 var canvasWidth, canvasHeight;
-var socketio = io.connect(location.origin + '/audio', {transports: ['websocket']});
-//var socketioSTT = io.connect('ws://0.0.0.0:8000/api/v1/stt/mic', {transports: ['websocket']});
+// socketio is the original websocket server from the example
+// https://github.com/miguelgrinberg/socketio-examples
+var socketio = io.connect('http://127.0.0.1:5555', {transports: ['websocket']});
+// socketioSTT is josh trying to open a connection to an STT server
+// where the STT server is from https://github.com/JEMeyer/deepspeech-rest-api/tree/multiModel
+var socketioSTT = io.connect('ws://127.0.0.1:8000/api/v1/stt/mic', {transports: ['websocket']});
 socketio.on('add-wavefile', function(url) {
     // add new recording to page
     audio = document.createElement('p');
@@ -40,11 +43,13 @@ function toggleRecording( e ) {
         // stop recording
         e.classList.remove('recording');
         recording = false;
+	window.alert("STOP RECORDING");
         socketio.emit('end-recording');
     } else {
         // start recording
         e.classList.add('recording');
         recording = true;
+	window.alert("START RECORDING");
         socketio.emit('start-recording', {numChannels: 1, bps: 16, fps: parseInt(audioContext.sampleRate)});
     }
 }

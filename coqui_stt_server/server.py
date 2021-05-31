@@ -7,13 +7,16 @@ import threading
 import time
 from typing import Optional, Tuple
 
-from flask import Flask, Response, redirect, render_template, request, url_for
+from flask import Flask, Response, Blueprint, redirect, render_template, request, url_for
 from flask_cors import CORS
+from flask_socketio import SocketIO
 
 from .modelmanager import ModelManager
 
 app = Flask(__name__)
 CORS(app, origins=["https://reub.in", "https://coqui.ai"])
+app.config['FILEDIR'] = 'static/_files/'
+socketio = SocketIO(app, cors_allowed_origins=["https://reub.in", "https://coqui.ai"])
 
 _server_initialized = threading.Event()
 
@@ -99,11 +102,49 @@ def transcription_client_page():
 #                           ws_transcription_server_info="foobar")
 
 
+### from Miguel grinbergs socketio audio example
+##
+#
+
+bp = Blueprint('audio', __name__, static_folder='static',
+               template_folder='templates')
+
+@socketio.on('start-recording', namespace='/audio')
+def start_recording(options):
+    """Start recording audio from the client."""
+    id = uuid.uuid4().hex  # server-side filename
+    session['wavename'] = id + '.wav'
+    wf = wave.open(current_app.config['FILEDIR'] + session['wavename'], 'wb')
+    wf.setnchannels(options.get('numChannels', 1))
+    wf.setsampwidth(options.get('bps', 16) // 8)
+    wf.setframerate(options.get('fps', 44100))
+    session['wavefile'] = wf
+
+
+@socketio.on('write-audio', namespace='/audio')
+def write_audio(data):
+    """Write a chunk of audio from the client."""
+    session['wavefile'].writeframes(data)
+
+
+@socketio.on('end-recording', namespace='/audio')
+def end_recording():
+    """Stop recording audio from the client."""
+    emit('add-wavefile', url_for('static',filename='_files/' + session['wavename']))
+    session['wavefile'].close()
+    del session['wavefile']
+    del session['wavename']
+
+#
+##
+### from Miguel grinbergs socketio audio example
+
 def start_app(host: str = "127.0.0.1", port: Optional[int] = None):
     if not is_debug():
         werkzeug_log = logging.getLogger("werkzeug")
         werkzeug_log.setLevel(logging.ERROR)
 
+    port=5555
     # Get available but known port if no explicit port was specified
     if not port:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
