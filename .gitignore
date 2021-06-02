@@ -136,3 +136,10 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Sublime Text files
+.sublime-preoject
+.sublime-workspace
+
+# Node.JS node_modules folder
+node_modules/

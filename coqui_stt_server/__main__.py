@@ -10,7 +10,7 @@ def main():
     thread.start()
     host, port = get_server_hostport()
     addr = f"http://{host}:{port}"
-    print(f"Started server listening on {addr}...")
+    print(f"Started server listening on {addr} ...")
     webbrowser.open(addr)
     thread.join()
 

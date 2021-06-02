@@ -5,7 +5,7 @@ import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 from threading import Thread
-from typing import Iterator, List, Optional, Tuple
+from typing import Dict, Iterator, List, Optional, Tuple
 
 import requests
 from coqpit import Coqpit
@@ -153,6 +153,9 @@ class ModelManager:
 
     def list_models(self) -> List[ModelCard]:
         return self.installed_models.models
+
+    def models_dict(self) -> Dict[str, ModelCard]:
+        return {m.name: m for m in self.installed_models.models}
 
     def has_install_task_state(self, install_id: uuid.UUID):
         return str(install_id) in self.install_tasks

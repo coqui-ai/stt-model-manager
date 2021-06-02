@@ -8,7 +8,7 @@
 </thead>
 <tbody>
 {% for card in installed_models %}
-    <tr><td>{{ card.name }}</td><td>{{ card.language }}</td><td>{{ card.version }}</td><td>{{ card.creator }}</td></tr>
+    <tr><td><a href="{{ url_for('transcribe_with_model', model_name=card.name) }}">{{ card.name }}</a></td><td>{{ card.language }}</td><td>{{ card.version }}</td><td>{{ card.creator }}</td></tr>
 {% endfor %}
 </tbody>
 </table>
