@@ -7,7 +7,6 @@ const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -165,15 +164,9 @@ module.exports = function(webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.js',
+      filename: 'static/js/bundle.min.js',
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
-      // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
       // We inferred the "public path" (such as / or /my-project) from homepage.
@@ -237,6 +230,10 @@ module.exports = function(webpackEnv) {
           },
           sourceMap: shouldUseSourceMap,
         }),
+        new webpack.optimize.LimitChunkCountPlugin({
+          // Limit output to 1 chunk
+          maxChunks: 1
+        }),
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
@@ -257,19 +254,8 @@ module.exports = function(webpackEnv) {
           },
         }),
       ],
-      // Automatically split vendor and commons
-      // https://twitter.com/wSokra/status/969633336732905474
-      // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-      splitChunks: {
-        chunks: 'all',
-        name: false,
-      },
-      // Keep the runtime chunk separated to enable long term caching
-      // https://twitter.com/wSokra/status/969679223278505985
-      // https://github.com/facebook/create-react-app/issues/5358
-      runtimeChunk: {
-        name: entrypoint => `runtime-${entrypoint.name}`,
-      },
+      // Disable creating runtime.chunk.js
+      runtimeChunk: false,
     },
     resolve: {
       // This allows you to set a fallback for where webpack should look for modules.
@@ -534,12 +520,6 @@ module.exports = function(webpackEnv) {
             : undefined
         )
       ),
-      // Inlines the webpack runtime script. This script is too small to warrant
-      // a network request.
-      // https://github.com/facebook/create-react-app/issues/5358
-      isEnvProduction &&
-        shouldInlineRuntimeChunk &&
-        new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
       // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
@@ -571,8 +551,7 @@ module.exports = function(webpackEnv) {
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
-          filename: 'static/css/[name].[contenthash:8].css',
-          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+          filename: 'static/css/bundle.min.css'
         }),
       // Generate an asset manifest file with the following content:
       // - "files" key: Mapping of all asset filenames to their corresponding
