@@ -6,7 +6,9 @@
         document.getElementById("progress").textContent = event.data + "%";
         if (event.data == "100") {
             source.close();
-            window.location.replace("/");
+            setTimeout(() => {
+                window.location.replace("/");
+            }, 300);
         }
     }
 </script>

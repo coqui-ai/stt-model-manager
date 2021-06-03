@@ -48,18 +48,23 @@ def _download_one(url: str, dest_path: Path):
 
     with open(dest_path, "wb") as fout:
         if total_length is None:
+            print(f"Unknown download size for {url}. Downloading...")
             yield 0
             fout.write(response.content)
             yield 100
+            print("Done")
         else:
             total_bytes = int(total_length)
             done_bytes = 0
-            for chunk in response.iter_content(chunk_size=8192):
+            print(f"File is {total_bytes} bytes large for {url}, downloading...")
+            for chunk in response.iter_content(chunk_size=5 * 2 ** 20):
                 done_bytes += len(chunk)
+                print(f"{done_bytes} out of {total_bytes} downloaded")
                 fout.write(chunk)
                 done_pct = math.ceil((done_bytes / total_bytes) * 100)
                 yield done_pct
             yield 100
+            print("Done")
 
 
 class ModelInstallTask(Thread):  # pylint: disable=too-many-instance-attributes
@@ -195,9 +200,12 @@ class ModelManager:
         acoustic_basename = Path(urllib.parse.urlparse(card.acoustic).path).name
         output_acoustic = model_base_path / acoustic_basename
 
+        scorer_url = None
         scorer_basename = None
         output_scorer = None
-        if card.scorer:
+        # TODO: remove the second test once the server is fixed to avoid sending the literal string "undefined"
+        if card.scorer and card.scorer != "undefined":
+            scorer_url = card.scorer
             scorer_basename = Path(urllib.parse.urlparse(card.scorer).path).name
             output_scorer = model_base_path / scorer_basename
 
@@ -207,10 +215,11 @@ class ModelManager:
             model_card=card,
             acoustic_url=card.acoustic,
             acoustic_path=output_acoustic,
-            scorer_url=card.scorer,
+            scorer_url=scorer_url,
             scorer_path=output_scorer,
         )
         self.set_install_task_state(install_id, install_task)
+        print(f"Starting install thread...")
         install_task.start()
         return install_id
 

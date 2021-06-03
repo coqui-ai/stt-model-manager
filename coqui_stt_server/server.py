@@ -17,12 +17,13 @@ from flask_cors import CORS
 from flask_socketio import Namespace, SocketIO, emit
 from stt import Model
 from webrtcvad import Vad
+from werkzeug.serving import is_running_from_reloader
 
 from .modelmanager import ModelManager
 
 Payload.max_decode_packets = 10000
 app = Flask(__name__)
-CORS(app, origins=["https://coqui.ai"])
+CORS(app)
 socketio = SocketIO(app)
 
 VAD = Vad(3)  # Very aggressive
@@ -51,7 +52,7 @@ def index():
     host, port = get_server_hostport()
     return render_template(
         "index.html",
-        model_zoo_url=f"https://coqui.ai/models?callback_url=http://{host}:{port}/install_model",
+        model_zoo_url=f"http://localhost:8000/models?callback_url=http://{host}:{port}/install_model",
         installed_models=list(app.config["MODEL_MANAGER"].list_models()),
     )
 
@@ -68,8 +69,10 @@ def install_model():
 def on_connect(model_name):
     print(f"Starting session for model {model_name}")
     model_card = app.config["MODEL_MANAGER"].models_dict()[model_name]
-    model_instance = Model(model_card.acoustic_path)
+    print(f"Creating model instance from {model_card.acoustic_path}")
+    model_instance = Model(str(model_card.acoustic_path))
     if model_card.scorer_path:
+        print(f"Enabling external scorer from {model_card.scorer_path}")
         model_instance.enableExternalScorer(model_card.scorer_path)
 
     session[request.sid] = TranscriptionInstance(request.sid, model_instance)
@@ -177,6 +180,7 @@ def model_install_page(install_id: str):
 
 @app.route("/install_model/<string:install_id>/progress")
 def get_progress_for_install(install_id: str):
+    print(f"Got request for progress updates for model install {install_id}")
     if not app.config["MODEL_MANAGER"].has_install_task_state(install_id):
         return ("Not found", 404)
 
@@ -187,6 +191,7 @@ def get_progress_for_install(install_id: str):
             .total_progress
         )
         while progress < 100:
+            print(f"Progress: {progress}")
             yield f"data:{progress}\n\n"
             time.sleep(1)
             progress = (
@@ -207,7 +212,12 @@ def transcribe_with_model(model_name: str):
     return render_template("transcribe.html", model_name=model_name)
 
 
-def start_app(host: str = "127.0.0.1", port: Optional[int] = None):
+@app.before_first_request
+def on_server_init():
+    print(f"running from reloader = {is_running_from_reloader()}")
+
+
+def build_app(host: str = "127.0.0.1", port: Optional[int] = None):
     if not is_debug():
         werkzeug_log = logging.getLogger("werkzeug")
         werkzeug_log.setLevel(logging.ERROR)
@@ -224,11 +234,15 @@ def start_app(host: str = "127.0.0.1", port: Optional[int] = None):
     app.config["SERVER_PORT"] = port
     app.secret_key = b"aeiou"
     _server_initialized.set()
+    return app
 
+
+def start_app(app: Flask):
+    host, port = get_server_hostport()
     socketio.run(
         app,
         host=host,
         port=port,
         debug=is_debug(),
-        use_reloader=False,  # Disable reloader to avoid problems when running the server from a thread
+        use_reloader=is_debug(),  # Disable reloader to avoid problems when running the server from a thread
     )
