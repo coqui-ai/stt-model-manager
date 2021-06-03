@@ -1,0 +1,2 @@
+graft coqui_stt_server/templates
+graft coqui_stt_server/static

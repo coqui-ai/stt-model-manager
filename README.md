@@ -9,10 +9,19 @@ $ pip install coqui_stt_server
 $ stt-server
 ```
 
-# Development install
+# Build from source
 
 ```bash
 $ # Create and activate virtualenv
-$ pip install -e .
-$ python .pre-commit-2.13.0.pyz install # Install pre-commit hooks for development
+$ python -m venv /tmp/venv
+$ /tmp/venv/bin/activate
+$ make dev_install
+$ make install_pre_commit_hooks # Install pre-commit hooks for development
+```
+
+# Build Python package (sdist/wheel)
+
+```bash
+$ make package
+$ ll dist/
 ```
