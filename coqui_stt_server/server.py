@@ -213,7 +213,7 @@ class TranscriptionInstance(threading.Thread):
         self.model = Model(str(self.model_card.acoustic_path))
         if self.model_card.scorer_path:
             print(f"Enabling external scorer from {self.model_card.scorer_path}")
-            self.model.enableExternalScorer(self.model_card.scorer_path)
+            self.model.enableExternalScorer(str(self.model_card.scorer_path))
         self.stream = self.model.createStream()
 
         while True:
