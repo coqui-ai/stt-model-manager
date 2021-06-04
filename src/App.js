@@ -11,14 +11,13 @@ class App extends Component {
 			recording: false,
 			recordingStart: 0,
 			recordingTime: 0,
+			recognitionCount: 0,
 			recognitionOutput: [],
 			modelName: props.modelName
 		};
 	}
 
 	componentDidMount() {
-		let recognitionCount = 0;
-
 		this.socket = io();
 
 		this.socket.emit('start', this.props.modelName);
@@ -36,11 +35,18 @@ class App extends Component {
 
 		this.socket.on('recognize', (results) => {
 			console.log('recognized:', results);
-			let {recognitionOutput} = this.state;
-			results.id = recognitionCount++;
-			recognitionOutput.unshift(results);
+			let {recognitionCount, recognitionOutput} = this.state;
+			recognitionOutput[0].text = results.text;
+			recognitionOutput.unshift({id: recognitionCount++, text: ""});
 			// Keep only 5 results visible
 			recognitionOutput = recognitionOutput.slice(0, 5);
+			this.setState({recognitionCount, recognitionOutput});
+		});
+
+		this.socket.on('intermediate', (results) => {
+			console.log('intermediate:', results);
+			let {recognitionOutput} = this.state;
+			recognitionOutput[0].text = results.text;
 			this.setState({recognitionOutput});
 		});
 	}
@@ -48,11 +54,11 @@ class App extends Component {
 	render() {
 		return (<div className="App">
 			<div>
-				<button class="btn btn-outline-dark" disabled={!this.state.connected || this.state.recording} onClick={this.startRecording}>
+				<button class="rec-btn btn btn-outline-dark" disabled={!this.state.connected || this.state.recording} onClick={this.startRecording}>
 					Start Recording
 				</button>
 
-				<button class="btn btn-outline-dark" disabled={!this.state.recording} onClick={this.stopRecording}>
+				<button class="rec-btn btn btn-outline-dark" disabled={!this.state.recording} onClick={this.stopRecording}>
 					Stop Recording
 				</button>
 
@@ -106,10 +112,18 @@ class App extends Component {
 
 	startRecording = e => {
 		if (!this.state.recording) {
+			let {recognitionCount, recognitionOutput} = this.state;
+			recognitionOutput.unshift({id: recognitionCount++, text: ""});
+			this.setState({recognitionCount, recognitionOutput});
+
 			this.recordingInterval = setInterval(() => {
 				let recordingTime = new Date().getTime() - this.state.recordingStart;
 				this.setState({recordingTime});
 			}, 100);
+
+			this.updatesInterval = setInterval(() => {
+				this.socket.emit("stream-intermediate");
+			}, 350);
 
 			this.setState({
 				recording: true,
@@ -154,10 +168,18 @@ class App extends Component {
 
 	stopRecording = e => {
 		if (this.state.recording) {
+			let {recognitionCount, recognitionOutput} = this.state;
+			if (recognitionOutput[0].text.length == 0) {
+				recognitionOutput = recognitionOutput.slice(1);
+				recognitionCount--;
+				this.setState({recognitionCount, recognitionOutput});
+			}
+
 			if (this.socket.connected) {
 				this.socket.emit('stream-reset');
 			}
 			clearInterval(this.recordingInterval);
+			clearInterval(this.updatesInterval);
 			this.setState({
 				recording: false
 			}, () => {

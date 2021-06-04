@@ -29,7 +29,7 @@
 }
 
 .time-badge {
-    margin-left: 16px;
+    margin-left: 8px;
     padding: 12px;
 }
 
@@ -39,6 +39,11 @@
     padding: 1.25rem;
     border: 1px solid #eee;
     border-radius: .25rem;
+}
+
+.rec-btn {
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 /* Bootstrap Docs callouts */

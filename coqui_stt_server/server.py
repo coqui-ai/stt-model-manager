@@ -121,10 +121,10 @@ def on_stream_reset():
     instance.stream_reset()
 
 
-@socketio.on("stream-end")
-def on_stream_end():
+@socketio.on("stream-intermediate")
+def on_stream_intermediate():
     instance = session[request.sid]
-    instance.stream_end()
+    instance.stream_intermediate()
 
 
 class TranscriptionInstance(threading.Thread):
@@ -159,6 +159,14 @@ class TranscriptionInstance(threading.Thread):
         self.stream = self.model.createStream()
         self.recorded_chunks = 0
         self.silence_start = None
+
+    def stream_intermediate(self):
+        self.queue.put(("intermediate", None))
+
+    def _stream_intermediate(self):
+        result = self.stream.intermediateDecode()
+        if result:
+            socketio.emit("intermediate", {"text": result}, to=self.sid)
 
     def _process_voice(self, data):
         data = np.frombuffer(data, np.int16)
@@ -225,6 +233,8 @@ class TranscriptionInstance(threading.Thread):
                 self._process_data(data)
             elif cmd == "reset":
                 self._stream_reset()
+            elif cmd == "intermediate":
+                self._stream_intermediate()
 
 
 @app.route("/installs_progress")
