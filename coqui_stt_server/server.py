@@ -3,8 +3,10 @@ import json
 import logging
 import os
 import socket
+import sys
 import threading
 import time
+import webbrowser
 from collections import deque
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -12,7 +14,16 @@ from typing import Optional, Tuple
 
 import numpy as np
 from engineio.payload import Payload
-from flask import Flask, Response, redirect, render_template, request, session, url_for
+from flask import (
+    Flask,
+    Response,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 from flask_cors import CORS
 from flask_socketio import Namespace, SocketIO, emit
 from stt import Model
@@ -36,6 +47,12 @@ def is_debug() -> bool:
     return "COQUI_STT_SERVER_DEBUG" in os.environ
 
 
+def open_folder(path: Path):
+    assert path.is_dir()
+    assert path.is_absolute()
+    webbrowser.open(f"file://{path}")
+
+
 def get_server_hostport() -> Tuple[str, int]:
     _server_initialized.wait()
     assert (
@@ -50,10 +67,17 @@ def get_server_hostport() -> Tuple[str, int]:
 @app.route("/")
 def index():
     host, port = get_server_hostport()
+    current_installs = [
+        task.to_dict()
+        for task in app.config["MODEL_MANAGER"].install_tasks.values()
+        if task.total_progress < 100
+    ]
+    print(f"Current installs: {current_installs}")
     return render_template(
         "index.html",
         model_zoo_url=f"http://coqui.ai/models?callback_url=http://{host}:{port}/install_model",
         installed_models=list(app.config["MODEL_MANAGER"].list_models()),
+        models_being_installed=current_installs,
     )
 
 
@@ -61,8 +85,18 @@ def index():
 def install_model():
     model_card = json.loads(request.data)
     print(f"Install model got data: {json.dumps(model_card)}")
-    install_id = app.config["MODEL_MANAGER"].download_model(model_card)
-    return redirect(url_for("model_install_page", install_id=install_id))
+    app.config["MODEL_MANAGER"].download_model(model_card)
+    return redirect(url_for("index"))
+
+
+@app.route("/show_model_files/<string:model_name>")
+def show_model_files(model_name):
+    if model_name not in app.config["MODEL_MANAGER"].models_dict():
+        return (404, "Not found")
+
+    model_card = app.config["MODEL_MANAGER"].models_dict()[model_name]
+    open_folder(Path(model_card.acoustic_path).parent)
+    return redirect(url_for("index"))
 
 
 @socketio.on("start")
@@ -166,42 +200,12 @@ class TranscriptionInstance:
             self.silence_buffers.append(data)
 
 
-@app.route("/install_model/<string:install_id>")
-def model_install_page(install_id: str):
-    print(app.config["MODEL_MANAGER"].install_tasks)
-    task = app.config["MODEL_MANAGER"].get_install_task_state(install_id)
-    return render_template(
-        "model_install.html",
-        install_id=install_id,
-        model_name=task.model_card.name,
-        start_progress=task.total_progress,
-    )
-
-
-@app.route("/install_model/<string:install_id>/progress")
-def get_progress_for_install(install_id: str):
-    print(f"Got request for progress updates for model install {install_id}")
-    if not app.config["MODEL_MANAGER"].has_install_task_state(install_id):
-        return ("Not found", 404)
-
-    def generate():
-        progress = (
-            app.config["MODEL_MANAGER"]
-            .get_install_task_state(install_id)
-            .total_progress
-        )
-        while progress < 100:
-            print(f"Progress: {progress}")
-            yield f"data:{progress}\n\n"
-            time.sleep(1)
-            progress = (
-                app.config["MODEL_MANAGER"]
-                .get_install_task_state(install_id)
-                .total_progress
-            )
-        yield "data:100\n\n"
-
-    return Response(generate(), mimetype="text/event-stream")
+@app.route("/installs_progress")
+def get_progress_for_install():
+    tasks = [
+        task.to_dict() for task in app.config["MODEL_MANAGER"].install_tasks.values()
+    ]
+    return jsonify(tasks)
 
 
 @app.route("/transcribe/<string:model_name>")
@@ -210,11 +214,6 @@ def transcribe_with_model(model_name: str):
         return (404, "Model not found")
 
     return render_template("transcribe.html", model_name=model_name)
-
-
-@app.before_first_request
-def on_server_init():
-    print(f"running from reloader = {is_running_from_reloader()}")
 
 
 def build_app(host: str = "127.0.0.1", port: Optional[int] = None):

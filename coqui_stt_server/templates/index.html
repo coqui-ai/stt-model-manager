@@ -1,14 +1,123 @@
 <!DOCTYPE html>
+<head>
 <meta charset="UTF-8">
-<a href="{{ model_zoo_url }}">Install model from Coqui STT Model Zoo</a>
-<table border="1">
+<title>Coqui STT Model Manager</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons.css') }}">
+<style>
+.body-wrapper {
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.stt-logo {
+    max-width: 100%;
+}
+
+.models-table {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.table-btn {
+    margin-left: 15%;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 20px;
+}
+
+.intro {
+    margin-top: 16px;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const models_being_installed = {{ models_being_installed|tojson }};
+    console.log(`Models being installed: ${models_being_installed}`);
+    let shouldRefresh = false;
+    for (const install of models_being_installed) {
+        if (install.total_progress < 100) {
+            shouldRefresh = true;
+        }
+    }
+    if (models_being_installed.length > 0) {
+        function refresh() {
+            fetch("/installs_progress")
+            .then(response => response.json())
+            .then(progressUpdate => {
+                console.log(`Got progress update: ${progressUpdate}`);
+                let shouldStop = true;
+                for (const install of progressUpdate) {
+                    console.log(install);
+                    const span = document.querySelector(`.install-progress[data-install-id="${install.install_id}"]`);
+                    if (span) {
+                        span.textContent = install.total_progress + "%";
+                    }
+                    if (install.total_progress < 100) {
+                        shouldStop = false;
+                    }
+                }
+                if (shouldStop) {
+                    console.log("Stopping");
+                    if (shouldRefresh) {
+                        console.log("Refreshing");
+                        setTimeout(() => {
+                            window.location.replace("/");
+                        }, 500);
+                    }
+                } else {
+                    setTimeout(refresh, 1000);
+                }
+            });
+        }
+        console.log("Listening for installation progress...");
+        refresh();
+    }
+});
+</script>
+</head>
+<body>
+<div class="body-wrapper">
+<img alt="Coqui STT logo" class="stt-logo" src="{{ url_for('static', filename='coqui-STT-logo-green.png') }}">
+<p class="intro">Here you can manage and try out your installed Coqui STT models as well as install new ones from the Coqui Model Zoo. The Coqui Model Zoo is the central hub for finding STT models created our community as well as official Coqui models.</p>
+<table class="models-table table">
 <thead>
-<tr><th colspan="4">Installed models</th></tr>
-<tr><th>Name</th><th>Language</th><th>Version</th><th>Creator</th></tr>
+<tr><th colspan="6">Installed STT models</th></tr>
+<tr><th>Name</th><th>Language</th><th>Version</th><th>Creator</th><th>Run model</th><th>Show files</th></tr>
 </thead>
 <tbody>
 {% for card in installed_models %}
-    <tr><td><a href="{{ url_for('transcribe_with_model', model_name=card.name) }}">{{ card.name }}</a></td><td>{{ card.language }}</td><td>{{ card.version }}</td><td>{{ card.creator }}</td></tr>
+<tr>
+    <td>{{ card.name }}</td>
+    <td>{{ card.language }}</td>
+    <td>{{ card.version }}</td>
+    <td>{{ card.creator }}</td>
+    <td><a href="{{ url_for('transcribe_with_model', model_name=card.name) }}"><i class="table-btn bi bi-play-btn"></i></a></td>
+    <td><a href="{{ url_for('show_model_files', model_name=card.name) }}"><i class="table-btn bi bi-folder-symlink"></i></a></td>
+</tr>
 {% endfor %}
+{% if models_being_installed %}
+<tr><th colspan="6">Models being installed</th></tr>
+{% for install in models_being_installed %}
+    <tr>
+        <td>{{ install['model_card']['name'] }}</td>
+        <td><span class="install-progress" data-install-id="{{ install['install_id'] }}">{{ install['total_progress'] }}%...</span></td>
+    </tr>
+{% endfor %}
+{% endif %}
 </tbody>
+<tfoot>
+<tr><th colspan="6"><a href="{{ model_zoo_url }}">
+{% if installed_models|length > 0 %}
+Install a new model from the Coqui STT Model Zoo...
+{% else %}
+Start by clicking here to install a model from the Coqui STT Model zoo.
+{% endif %}
+</a></th></tr>
+</tfoot>
 </table>
+</div>
+</body>

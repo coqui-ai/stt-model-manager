@@ -74,14 +74,16 @@ class ModelInstallTask(Thread):  # pylint: disable=too-many-instance-attributes
     def __init__(
         self,
         model_manager: "ModelManager",
+        install_id: uuid.UUID,
         model_card: ModelCard,
         acoustic_url: str,
         acoustic_path: Path,
         scorer_url: Optional[str] = None,
         scorer_path: Optional[Path] = None,
     ):
-        super().__init__()
+        super().__init__(daemon=True)
         self.model_manager = model_manager
+        self.install_id = install_id
         self.model_card = model_card
         self.acoustic_url = acoustic_url
         self.acoustic_path = acoustic_path
@@ -114,6 +116,26 @@ class ModelInstallTask(Thread):  # pylint: disable=too-many-instance-attributes
         progress_pct = ((self.acoustic_progress + self.scorer_progress) / 200) * 100
         return math.ceil(progress_pct)
 
+    def to_dict(self):
+        base_obj = {
+            name: getattr(self, name)
+            for name in (
+                "acoustic_url",
+                "has_scorer",
+                "scorer_url",
+                "total_steps",
+                "step",
+                "acoustic_progress",
+                "scorer_progress",
+                "total_progress",
+            )
+        }
+        base_obj["install_id"] = str(self.install_id)
+        base_obj["model_card"] = self.model_card.to_dict()
+        base_obj["acoustic_path"] = str(self.acoustic_path)
+        base_obj["scorer_path"] = str(self.scorer_path)
+        return base_obj
+
     def run(self):
         self.acoustic_path.parent.mkdir(parents=True, exist_ok=True)
         self.step = 0
@@ -127,7 +149,7 @@ class ModelInstallTask(Thread):  # pylint: disable=too-many-instance-attributes
                 self.scorer_progress = progress
 
         self.model_manager.report_install_complete(
-            self.model_card, self.acoustic_path, self.scorer_path
+            self.install_id, self.model_card, self.acoustic_path, self.scorer_path
         )
 
 
@@ -193,6 +215,9 @@ class ModelManager:
         card = ModelCard.new_from_dict(model_card)
         card.check_values()
 
+        if card.name in self.models_dict() and self.models_dict()[card.name].installed:
+            return None
+
         # Model files are put in a folder matching model name, inside install dir
         model_base_path = self.install_dir / card.name
 
@@ -212,6 +237,7 @@ class ModelManager:
         install_id = uuid.uuid4()
         install_task = ModelInstallTask(
             model_manager=self,
+            install_id=install_id,
             model_card=card,
             acoustic_url=card.acoustic,
             acoustic_path=output_acoustic,
@@ -224,7 +250,11 @@ class ModelManager:
         return install_id
 
     def report_install_complete(
-        self, model_card: ModelCard, acoustic_path: Path, scorer_path: Optional[Path]
+        self,
+        install_id: uuid.UUID,
+        model_card: ModelCard,
+        acoustic_path: Path,
+        scorer_path: Optional[Path],
     ):
         model_card.acoustic_path = acoustic_path
         model_card.scorer_path = scorer_path

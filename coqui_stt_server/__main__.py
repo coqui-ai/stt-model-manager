@@ -1,9 +1,9 @@
 """Entry point. Run the server and open a browser pointing to it."""
 import time
-import urllib.error
-import urllib.request
 import webbrowser
 from threading import Thread
+
+import requests
 
 from .server import build_app, get_server_hostport, start_app
 
@@ -16,10 +16,10 @@ def main():
     def check_server_started_loop():
         while True:
             try:
-                req = urllib.request.urlopen(addr)
-                if req.code == 200:
+                req = requests.get(addr, headers={"User-Agent": "page-opener-thread"})
+                if req.status_code == 200:
                     break
-            except urllib.error.URLError:
+            except:
                 pass
             time.sleep(0.1)
         print(f"Started server listening on {addr} ...")
