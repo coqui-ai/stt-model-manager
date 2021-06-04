@@ -25,7 +25,7 @@ jobs:
       - run: |
           python -m pip install -U pip setuptools twine build
       - run: |
-          python -m build
+          make package
       - run: |
           ls -lh dist/
       - name: Setup PyPI config
