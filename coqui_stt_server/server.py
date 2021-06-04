@@ -10,6 +10,7 @@ import webbrowser
 from collections import deque
 from datetime import datetime, timedelta
 from pathlib import Path
+from queue import SimpleQueue
 from typing import Optional, Tuple
 
 import numpy as np
@@ -30,7 +31,7 @@ from stt import Model
 from webrtcvad import Vad
 from werkzeug.serving import is_running_from_reloader
 
-from .modelmanager import ModelManager
+from .modelmanager import ModelCard, ModelManager
 
 Payload.max_decode_packets = 10000
 app = Flask(__name__)
@@ -103,13 +104,9 @@ def show_model_files(model_name):
 def on_connect(model_name):
     print(f"Starting session for model {model_name}")
     model_card = app.config["MODEL_MANAGER"].models_dict()[model_name]
-    print(f"Creating model instance from {model_card.acoustic_path}")
-    model_instance = Model(str(model_card.acoustic_path))
-    if model_card.scorer_path:
-        print(f"Enabling external scorer from {model_card.scorer_path}")
-        model_instance.enableExternalScorer(model_card.scorer_path)
-
-    session[request.sid] = TranscriptionInstance(request.sid, model_instance)
+    instance = TranscriptionInstance(request.sid, model_card)
+    instance.start()
+    session[request.sid] = instance
 
 
 @socketio.on("stream-data")
@@ -130,31 +127,39 @@ def on_stream_end():
     instance.stream_end()
 
 
-class TranscriptionInstance:
-    def __init__(self, session_id: str, model_instance: Model):
+class TranscriptionInstance(threading.Thread):
+    def __init__(self, session_id: str, model_card: ModelCard):
+        super().__init__(daemon=True)
         self.sid = session_id
-        self.model = model_instance
+        self.model_card = model_card
+        self.model = None
         self.recorded_chunks = 0
         self.silence_start = None
-        self.silence_buffers: deque = self.reset_silence_buffers()
-        self.stream = self.model.createStream()
+        self.silence_buffers: deque = self._reset_silence_buffers()
+        self.queue: SimpleQueue = SimpleQueue()
 
-    def reset_silence_buffers(self) -> deque:
+    def _reset_silence_buffers(self) -> deque:
         return deque(maxlen=3)
 
     def process_data(self, data):
+        self.queue.put(("data", data))
+
+    def _process_data(self, data):
         if VAD.is_speech(data, 16000):
-            self.process_voice(data)
+            self._process_voice(data)
         else:
-            self.process_silence(data)
+            self._process_silence(data)
 
     def stream_reset(self):
+        self.queue.put(("reset", None))
+
+    def _stream_reset(self):
         print(f"[{self.sid}:reset]")
         self.stream.finishStream()  # ignore results
         self.recorded_chunks = 0
         self.silence_start = None
 
-    def process_voice(self, data):
+    def _process_voice(self, data):
         data = np.frombuffer(data, np.int16)
 
         self.silence_start = None
@@ -164,14 +169,14 @@ class TranscriptionInstance:
             print("=", end="", flush=True)  # still recording
 
         self.recorded_chunks += 1
-        data_with_silence = self.add_buffered_silence(data)
-        self.silence_buffers = self.reset_silence_buffers()
+        data_with_silence = self._add_buffered_silence(data)
+        self.silence_buffers = self._reset_silence_buffers()
         self.stream.feedAudioContent(data_with_silence)
 
-    def add_buffered_silence(self, data):
+    def _add_buffered_silence(self, data):
         return np.concatenate((*self.silence_buffers, data))
 
-    def process_silence(self, data):
+    def _process_silence(self, data):
         data = np.frombuffer(data, np.int16)
 
         if self.recorded_chunks > 0:  # recording is on
@@ -188,16 +193,37 @@ class TranscriptionInstance:
                     print(f"[{self.sid}:end]")
                     result = self.stream.finishStream()
                     self.stream = self.model.createStream()
-                    self.silence_buffers = self.reset_silence_buffers()
+                    self.silence_buffers = self._reset_silence_buffers()
                     if result:
                         print(f"Recognized text: {result} (len={len(result)})")
-                        emit("recognize", {"text": result})
+                        socketio.emit("recognize", {"text": result}, to=self.sid)
         else:
             print(".", end="", flush=True)  # silence detected while not recording
             # VAD has a tendency to cut the first bit of audio data from the
             # start of a recording so keep a buffer of that first bit of audio
             # and reinsert it to the beginning of the recording.
             self.silence_buffers.append(data)
+
+    def exit(self):
+        self.queue.put(("exit", None))
+
+    def run(self):
+        print(f"Creating model instance from {self.model_card.acoustic_path}")
+        self.model = Model(str(self.model_card.acoustic_path))
+        if self.model_card.scorer_path:
+            print(f"Enabling external scorer from {self.model_card.scorer_path}")
+            self.model.enableExternalScorer(self.model_card.scorer_path)
+        self.stream = self.model.createStream()
+
+        while True:
+            cmd, data = self.queue.get()
+            if cmd == "exit":
+                break
+
+            if cmd == "data":
+                self._process_data(data)
+            elif cmd == "reset":
+                self._stream_reset()
 
 
 @app.route("/installs_progress")
