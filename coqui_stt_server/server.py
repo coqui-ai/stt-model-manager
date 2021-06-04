@@ -156,6 +156,7 @@ class TranscriptionInstance(threading.Thread):
     def _stream_reset(self):
         print(f"[{self.sid}:reset]")
         self.stream.finishStream()  # ignore results
+        self.stream = self.model.createStream()
         self.recorded_chunks = 0
         self.silence_start = None
 
