@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<head>
-<meta charset="UTF-8">
-<title>Coqui STT Model Manager</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons.css') }}">
-<style>
-.body-wrapper {
-    max-width: 960px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 32px;
-    margin-bottom: 32px;
-}
+{% extends 'base.html' %}
 
-.stt-logo {
-    max-width: 100%;
-}
+{% block title %}Coqui STT Model Manager{% endblock %}
 
-.models-table {
-    margin-top: 32px;
-    margin-bottom: 32px;
-}
-
-.table-btn {
-    margin-left: 15%;
-    padding-left: 2px;
-    padding-right: 2px;
-    font-size: 20px;
-}
-
-.intro {
-    margin-top: 16px;
-}
-</style>
+{% block extra_head %}
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const models_being_installed = {{ models_being_installed|tojson }};
@@ -78,10 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
-</head>
-<body>
-<div class="body-wrapper">
-<img alt="Coqui STT logo" class="stt-logo" src="{{ url_for('static', filename='coqui-STT-logo-green.png') }}">
+{% endblock %}
+
+{% block content %}
 <p class="intro">Here you can manage and try out your installed Coqui STT models as well as install new ones from the Coqui Model Zoo. The Coqui Model Zoo is the central hub for finding STT models created our community as well as official Coqui models.</p>
 <table class="models-table table">
 <thead>
@@ -119,5 +88,4 @@ Start by clicking here to install a model from the Coqui STT Model zoo.
 </a></th></tr>
 </tfoot>
 </table>
-</div>
-</body>
+{% endblock %}

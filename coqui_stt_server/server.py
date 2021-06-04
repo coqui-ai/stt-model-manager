@@ -213,7 +213,8 @@ def transcribe_with_model(model_name: str):
     if model_name not in app.config["MODEL_MANAGER"].models_dict():
         return (404, "Model not found")
 
-    return render_template("transcribe.html", model_name=model_name)
+    model_card = app.config["MODEL_MANAGER"].models_dict()[model_name]
+    return render_template("transcribe.html", model_card=model_card)
 
 
 def build_app(host: str = "127.0.0.1", port: Optional[int] = None):

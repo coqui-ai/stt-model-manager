@@ -1,8 +1,20 @@
-<!DOCTYPE html>
-<meta charset="UTF-8">
+{% extends 'base.html' %}
+
+{% block title %}Coqui STT - {{ model_card.name }}{% endblock %}
+
+{% block extra_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='build/static/css/bundle.min.css') }}">
+{% endblock %}
+
+{% block content %}
+<p>Transcribing with <strong>{{ model_card.name }}</strong>, created by {{ model_card.creator }}.</p>
 <div id="react-root"></div>
 <script src="{{ url_for('static', filename='build/static/js/bundle.min.js') }}"></script>
 <script>
-    startReactUI("{{ model_name }}");
+    startReactUI("{{ model_card.name }}");
 </script>
+<p>
+The Coqui Model Zoo collects models from our global community of researchers, developers and users.
+<a href="https://gitter.im/coqui-ai/community">Join our community on Gitter</a> to participate in the conversation, talk to the model creators, or learn how to create your own models.
+</p>
+{% endblock %}

@@ -1,0 +1,28 @@
+.body-wrapper {
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.stt-logo {
+    max-width: 100%;
+    margin-bottom: 32px;
+}
+
+.models-table {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.table-btn {
+    margin-left: 15%;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 20px;
+}
+
+.intro {
+    margin-top: 16px;
+}

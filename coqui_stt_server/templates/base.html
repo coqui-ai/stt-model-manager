@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-icons.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block head_extra %}{% endblock %}
+</head>
+<body>
+<div class="body-wrapper">
+<img alt="Coqui STT logo" class="stt-logo" src="{{ url_for('static', filename='coqui-STT-logo-green.png') }}">
+{% block content %}{% endblock %}
+</div>
+</body>
+</html>
