@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='build/static/css/bundle.min.css') }}">
+<div id="react-root"></div>
+<script src="{{ url_for('static', filename='build/static/js/bundle.min.js') }}"></script>
+<script>
+    startReactUI("{{ model_name }}");
+</script>
