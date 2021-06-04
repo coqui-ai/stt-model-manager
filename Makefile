@@ -7,8 +7,10 @@ help:
 node_deps: package.json
 	yarn install
 
-package: node_deps # build Python package
+react_build: node_deps
 	yarn build
+
+package: react_build # build Python package
 	python -m pip install build
 	python -m build
 
