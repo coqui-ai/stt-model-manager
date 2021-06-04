@@ -2,7 +2,7 @@
 
 {% block title %}Coqui STT Model Manager{% endblock %}
 
-{% block extra_head %}
+{% block head_extra %}
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const models_being_installed = {{ models_being_installed|tojson }};
