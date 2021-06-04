@@ -169,7 +169,7 @@ class App extends Component {
 	stopRecording = e => {
 		if (this.state.recording) {
 			let {recognitionCount, recognitionOutput} = this.state;
-			if (recognitionOutput[0].text.length == 0) {
+			if (recognitionOutput[0].text.length === 0) {
 				recognitionOutput = recognitionOutput.slice(1);
 				recognitionCount--;
 				this.setState({recognitionCount, recognitionOutput});
