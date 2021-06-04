@@ -9,6 +9,7 @@ node_deps: package.json
 
 package: node_deps # build Python package
 	yarn build
+	python -m pip install build
 	python -m build
 
 dev_install: node_deps
