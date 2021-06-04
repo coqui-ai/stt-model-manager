@@ -6,8 +6,21 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='build/static/css/bundle.min.css') }}">
 {% endblock %}
 
+{% block before_logo %}
+<a href="/" class="btn btn-outline-secondary">&laquo; Home</a>
+{% endblock %}
+
 {% block content %}
-<p>Transcribing with <strong>{{ model_card.name }}</strong>, created by {{ model_card.creator }}.</p>
+<p>Transcribing with <strong>{{ model_card.name }}</strong>, created by <strong>{{ model_card.creator }}</strong>.</p>
+{% if scorer_basename == "digits" %}
+<div class="bd-callout bd-callout-warning">
+Due to not having enough available data, this model is using an external scorer that only includes digits (ie. "one", "two", "three"... in {{ model_card.language }}). <strong>This means the model will not predict any other words</strong>. Try saying some digits to see the performance.
+</div>
+{% elif scorer_basename == "yesno" %}
+<div class="bd-callout bd-callout-warning">
+Due to not having enough available data, this model is using an external scorer that only includes the words "yes" and "no" (in {{ model_card.language }}). This means the model will <strong>not predict any other words</strong>.
+</div>
+{% endif %}
 <div id="react-root"></div>
 <script src="{{ url_for('static', filename='build/static/js/bundle.min.js') }}"></script>
 <script>

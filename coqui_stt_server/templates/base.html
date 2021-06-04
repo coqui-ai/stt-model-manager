@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="body-wrapper">
+{% block before_logo %}{% endblock %}
 <img alt="Coqui STT logo" class="stt-logo" src="{{ url_for('static', filename='coqui-STT-logo-green.png') }}">
 {% block content %}{% endblock %}
 </div>

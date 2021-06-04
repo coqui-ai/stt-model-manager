@@ -36,9 +36,11 @@ class App extends Component {
 
 		this.socket.on('recognize', (results) => {
 			console.log('recognized:', results);
-			const {recognitionOutput} = this.state;
+			let {recognitionOutput} = this.state;
 			results.id = recognitionCount++;
 			recognitionOutput.unshift(results);
+			// Keep only 5 results visible
+			recognitionOutput = recognitionOutput.slice(0, 5);
 			this.setState({recognitionOutput});
 		});
 	}
@@ -46,11 +48,11 @@ class App extends Component {
 	render() {
 		return (<div className="App">
 			<div>
-				<button disabled={!this.state.connected || this.state.recording} onClick={this.startRecording}>
+				<button class="btn btn-outline-dark" disabled={!this.state.connected || this.state.recording} onClick={this.startRecording}>
 					Start Recording
 				</button>
 
-				<button disabled={!this.state.recording} onClick={this.stopRecording}>
+				<button class="btn btn-outline-dark" disabled={!this.state.recording} onClick={this.stopRecording}>
 					Stop Recording
 				</button>
 
@@ -61,13 +63,13 @@ class App extends Component {
 	}
 
 	renderTime() {
-		return (<span>
+		return (<span class="time-badge badge bg-secondary">
 			{(Math.round(this.state.recordingTime / 100) / 10).toFixed(1)}s
 		</span>);
 	}
 
 	renderRecognitionOutput() {
-		return (<ul>
+		return (<ul class="stt-results-list">
 			{this.state.recognitionOutput.map((r) => {
 				return (<li key={r.id}>{r.text}</li>);
 			})}
