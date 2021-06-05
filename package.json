@@ -1,5 +1,5 @@
 {
-  "name": "web-microphone-websocket",
+  "name": "coqui_stt_model_manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

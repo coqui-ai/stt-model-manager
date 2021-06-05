@@ -33,7 +33,7 @@ _server_initialized = threading.Event()
 
 
 def is_debug() -> bool:
-    return "COQUI_STT_SERVER_DEBUG" in os.environ or "--debug" in sys.argv
+    return "COQUI_STT_MODEL_MANAGER_DEBUG" in os.environ or "--debug" in sys.argv
 
 
 def open_folder(path: Path):

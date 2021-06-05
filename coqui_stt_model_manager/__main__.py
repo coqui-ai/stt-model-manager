@@ -26,10 +26,10 @@ def main():
         print(f"Started server listening on {addr} ...")
         webbrowser.open(addr)
 
-    if "STT_SERVER_ALREADY_LOADED" not in os.environ:
+    if "STT_MODEL_MANAGER_ALREADY_LOADED" not in os.environ:
         thread = Thread(target=check_server_started_loop)
         thread.start()
-        os.environ["STT_SERVER_ALREADY_LOADED"] = "1"
+        os.environ["STT_MODEL_MANAGER_ALREADY_LOADED"] = "1"
 
     start_app(app)
 

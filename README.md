@@ -1,12 +1,12 @@
-# Coqui STT manager
+# Coqui STT Model manager
 
-🐸STT Manager is a tool for installing and trying out Coqui STT models from the [Coqui Model Zoo](https://coqui.ai/models/).
+🐸STT Model Manager is a tool for installing and trying out Coqui STT models from the [Coqui Model Zoo](https://coqui.ai/models/).
 
 # Usage
 
 ```bash
-$ pip install coqui_stt_server
-$ stt-server
+$ pip install coqui_stt_model_manager
+$ stt-model-manager
 ```
 
 # Build and install from source
@@ -55,7 +55,7 @@ $ # Create and activate virtualenv:
 $ python -m venv /tmp/venv
 $ /tmp/venv/bin/activate
 $ # Start server in debug mode with automatic server reloads:
-$ stt-server --debug
+$ stt-model-manager --debug
 ```
 
 For now you have to reload the browser manually. We'd gladly welcome a PR adding auto-refresh functionality :)

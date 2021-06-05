@@ -54,11 +54,11 @@ class App extends Component {
 	render() {
 		return (<div className="App">
 			<div>
-				<button class="rec-btn btn btn-outline-dark" disabled={!this.state.connected || this.state.recording} onClick={this.startRecording}>
+				<button className="rec-btn btn btn-outline-dark" disabled={!this.state.connected || this.state.recording} onClick={this.startRecording}>
 					Start Recording
 				</button>
 
-				<button class="rec-btn btn btn-outline-dark" disabled={!this.state.recording} onClick={this.stopRecording}>
+				<button className="rec-btn btn btn-outline-dark" disabled={!this.state.recording} onClick={this.stopRecording}>
 					Stop Recording
 				</button>
 
@@ -69,13 +69,13 @@ class App extends Component {
 	}
 
 	renderTime() {
-		return (<span class="time-badge badge bg-secondary">
+		return (<span className="time-badge badge bg-secondary">
 			{(Math.round(this.state.recordingTime / 100) / 10).toFixed(1)}s
 		</span>);
 	}
 
 	renderRecognitionOutput() {
-		return (<ul class="stt-results-list">
+		return (<ul className="stt-results-list">
 			{this.state.recognitionOutput.map((r) => {
 				return (<li key={r.id}>{r.text}</li>);
 			})}
@@ -122,7 +122,7 @@ class App extends Component {
 			}, 100);
 
 			this.updatesInterval = setInterval(() => {
-				this.socket.emit("stream-intermediate");
+				this.socket.emit('stream-intermediate');
 			}, 400);
 
 			this.setState({
