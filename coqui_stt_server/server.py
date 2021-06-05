@@ -2,7 +2,6 @@
 import json
 import logging
 import os
-import socket
 import sys
 import threading
 import time
@@ -29,7 +28,6 @@ from flask_cors import CORS
 from flask_socketio import Namespace, SocketIO, emit
 from stt import Model
 from webrtcvad import Vad
-from werkzeug.serving import is_running_from_reloader
 
 from .modelmanager import ModelCard, ModelManager
 
@@ -45,7 +43,7 @@ _server_initialized = threading.Event()
 
 
 def is_debug() -> bool:
-    return "COQUI_STT_SERVER_DEBUG" in os.environ
+    return "COQUI_STT_SERVER_DEBUG" in os.environ or "--debug" in sys.argv
 
 
 def open_folder(path: Path):
@@ -259,17 +257,10 @@ def transcribe_with_model(model_name: str):
     )
 
 
-def build_app(host: str = "127.0.0.1", port: Optional[int] = None):
+def build_app(host: str = "127.0.0.1", port: int = 38450):
     if not is_debug():
         werkzeug_log = logging.getLogger("werkzeug")
         werkzeug_log.setLevel(logging.ERROR)
-
-    # Get available but known port if no explicit port was specified
-    if not port:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.bind(("localhost", 0))
-        port = sock.getsockname()[1]
-        sock.close()
 
     app.config["MODEL_MANAGER"] = ModelManager()
     app.config["SERVER_HOST"] = host
@@ -281,6 +272,7 @@ def build_app(host: str = "127.0.0.1", port: Optional[int] = None):
 
 def start_app(app: Flask):
     host, port = get_server_hostport()
+
     socketio.run(
         app,
         host=host,

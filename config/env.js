@@ -98,4 +98,4 @@ function getClientEnvironment(publicUrl) {
   return { raw, stringified };
 }
 
-module.exports = getClientEnvironment;
+module.exports = {NODE_ENV, getClientEnvironment};

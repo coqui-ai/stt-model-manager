@@ -72,6 +72,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "watch": "NODE_ENV=development webpack --config config/webpack.config.js --watch",
     "test:client": "node scripts/test.js --env=jsdom --watchAll=false --coverage",
     "test:server": "NODE_ENV=dev mocha --recursive ./test/config.js ./test --exit"
   },
@@ -144,5 +145,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.7.0"
   }
 }

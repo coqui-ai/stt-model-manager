@@ -1,4 +1,5 @@
 """Entry point. Run the server and open a browser pointing to it."""
+import os
 import time
 import webbrowser
 from threading import Thread
@@ -25,8 +26,11 @@ def main():
         print(f"Started server listening on {addr} ...")
         webbrowser.open(addr)
 
-    thread = Thread(target=check_server_started_loop)
-    thread.start()
+    if "STT_SERVER_ALREADY_LOADED" not in os.environ:
+        thread = Thread(target=check_server_started_loop)
+        thread.start()
+        os.environ["STT_SERVER_ALREADY_LOADED"] = "1"
+
     start_app(app)
 
 
