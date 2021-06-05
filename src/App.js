@@ -123,7 +123,7 @@ class App extends Component {
 
 			this.updatesInterval = setInterval(() => {
 				this.socket.emit("stream-intermediate");
-			}, 350);
+			}, 400);
 
 			this.setState({
 				recording: true,
