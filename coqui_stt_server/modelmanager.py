@@ -149,7 +149,7 @@ class ModelInstallTask(Thread):  # pylint: disable=too-many-instance-attributes
                 self.scorer_progress = progress
 
         self.model_manager.report_install_complete(
-            self.install_id, self.model_card, self.acoustic_path, self.scorer_path
+            self.model_card, self.acoustic_path, self.scorer_path
         )
 
 
@@ -228,7 +228,7 @@ class ModelManager:
         scorer_url = None
         scorer_basename = None
         output_scorer = None
-        # TODO: remove the second test once the server is fixed to avoid sending the literal string "undefined"
+        # Remove the second test once the server is fixed to avoid sending the literal string "undefined"
         if card.scorer and card.scorer != "undefined":
             scorer_url = card.scorer
             scorer_basename = Path(urllib.parse.urlparse(card.scorer).path).name
@@ -245,13 +245,12 @@ class ModelManager:
             scorer_path=output_scorer,
         )
         self.set_install_task_state(install_id, install_task)
-        print(f"Starting install thread...")
+        print("Starting install thread...")
         install_task.start()
         return install_id
 
     def report_install_complete(
         self,
-        install_id: uuid.UUID,
         model_card: ModelCard,
         acoustic_path: Path,
         scorer_path: Optional[Path],

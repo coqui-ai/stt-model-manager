@@ -4,28 +4,18 @@ import logging
 import os
 import sys
 import threading
-import time
 import webbrowser
 from collections import deque
 from datetime import datetime, timedelta
 from pathlib import Path
 from queue import SimpleQueue
-from typing import Optional, Tuple
+from typing import Tuple
 
 import numpy as np
 from engineio.payload import Payload
-from flask import (
-    Flask,
-    Response,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-)
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_cors import CORS
-from flask_socketio import Namespace, SocketIO, emit
+from flask_socketio import SocketIO
 from stt import Model
 from webrtcvad import Vad
 
@@ -125,19 +115,27 @@ def on_stream_intermediate():
     instance.stream_intermediate()
 
 
+def _reset_silence_buffers() -> deque:
+    return deque(maxlen=3)
+
+
 class TranscriptionInstance(threading.Thread):
+    """Thread responsible for transcribing data for a single transcription instance
+    (which corresponds to a SocketIO session - see `on_connect`).
+    """
+
+    # pylint: disable=too-many-instance-attributes
+
     def __init__(self, session_id: str, model_card: ModelCard):
         super().__init__(daemon=True)
         self.sid = session_id
         self.model_card = model_card
         self.model = None
+        self.stream = None
         self.recorded_chunks = 0
         self.silence_start = None
-        self.silence_buffers: deque = self._reset_silence_buffers()
+        self.silence_buffers: deque = _reset_silence_buffers()
         self.queue: SimpleQueue = SimpleQueue()
-
-    def _reset_silence_buffers(self) -> deque:
-        return deque(maxlen=3)
 
     def process_data(self, data):
         self.queue.put(("data", data))
@@ -177,7 +175,7 @@ class TranscriptionInstance(threading.Thread):
 
         self.recorded_chunks += 1
         data_with_silence = self._add_buffered_silence(data)
-        self.silence_buffers = self._reset_silence_buffers()
+        self.silence_buffers = _reset_silence_buffers()
         self.stream.feedAudioContent(data_with_silence)
 
     def _add_buffered_silence(self, data):
@@ -200,7 +198,7 @@ class TranscriptionInstance(threading.Thread):
                     print(f"[{self.sid}:end]")
                     result = self.stream.finishStream()
                     self.stream = self.model.createStream()
-                    self.silence_buffers = self._reset_silence_buffers()
+                    self.silence_buffers = _reset_silence_buffers()
                     if result:
                         print(f"Recognized text: {result} (len={len(result)})")
                         socketio.emit("recognize", {"text": result}, to=self.sid)
@@ -270,11 +268,11 @@ def build_app(host: str = "127.0.0.1", port: int = 38450):
     return app
 
 
-def start_app(app: Flask):
+def start_app(app_instance: Flask):
     host, port = get_server_hostport()
 
     socketio.run(
-        app,
+        app_instance,
         host=host,
         port=port,
         debug=is_debug(),

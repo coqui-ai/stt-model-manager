@@ -20,7 +20,7 @@ def main():
                 req = requests.get(addr, headers={"User-Agent": "page-opener-thread"})
                 if req.status_code == 200:
                     break
-            except:
+            except requests.exceptions.ConnectionError:
                 pass
             time.sleep(0.1)
         print(f"Started server listening on {addr} ...")
