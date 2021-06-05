@@ -14,9 +14,11 @@ package: react_build # build Python package
 	python -m pip install build
 	python -m build
 
-dev_install: node_deps
-	yarn build
+dev_install: react_build
 	python -m pip install -e .
+
+install: react_build
+	python -m pip install .
 
 install_pre_commit_hooks: .pre-commit-config.yaml
 	python .pre-commit-2.13.0.pyz install
