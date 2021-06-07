@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
 <tfoot>
 <tr><th colspan="6"><a href="{{ model_zoo_url }}">
 {% if installed_models|length > 0 %}
-Install a new model from the Coqui STT Model Zoo...
+Install a new model from the Coqui STT Model Zoo.
 {% else %}
-Start by clicking here to install a model from the Coqui STT Model zoo.
+Install a model from the Coqui STT Model zoo to get started.
 {% endif %}
 </a></th></tr>
 </tfoot>
@@ -64,7 +64,7 @@ Start by clicking here to install a model from the Coqui STT Model zoo.
 {%- endmacro %}
 
 {% block content %}
-<p class="intro">Here you can manage and try out your installed Coqui STT models as well as install new ones from the Coqui Model Zoo. The Coqui Model Zoo is the central hub for finding STT models created our community as well as official Coqui models.</p>
+<p class="intro">A unified interface to connect your microphone to a Coqui Speech-to-Text model, manage your installed models and install new ones from the Coqui Model Zoo. The Coqui Model Zoo is the central hub for finding STT models created by our community as well as official Coqui models.</p>
 <table class="models-table table">
 <thead>
 <tr><th colspan="6">Installed STT models</th></tr>
