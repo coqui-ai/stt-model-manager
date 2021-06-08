@@ -15,7 +15,7 @@ Build dependencies:
 
  - Node.JS
  - Yarn
- - Python >=3.6
+ - Python >=3.7
  - Up-to-date pip/setuptools/wheel packages
 
 ```bash
