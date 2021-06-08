@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client';
 
-const DOWNSAMPLING_WORKER = '/static/build/downsampling_worker.js';
+const DOWNSAMPLING_WORKER = '/static/downsampling_worker.js';
 
 class App extends Component {
 	constructor(props) {
