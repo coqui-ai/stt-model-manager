@@ -28,3 +28,18 @@ jobs:
         with:
           name: python-pkg-${{ matrix.os }}-py${{ matrix.pyver }}.whl
           path: dist/*.whl
+  frontend-tests:
+    name: Frontend tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: |
+          make install
+      - run: |
+          make frontend_tests

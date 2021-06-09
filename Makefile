@@ -22,3 +22,6 @@ install: react_build
 
 install_pre_commit_hooks: .pre-commit-config.yaml
 	python .pre-commit-2.13.0.pyz install
+
+frontend_tests:
+	yarn run test:client
