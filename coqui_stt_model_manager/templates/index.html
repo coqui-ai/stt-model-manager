@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 {% macro footer() -%}
 <tfoot>
 <tr><th colspan="6"><a href="{{ model_zoo_url }}">
-{% if installed_models|length > 0 %}
+{% if installed_models|length > 0 or models_being_installed|length > 0 %}
 Install a new model from the Coqui STT Model Zoo.
 {% else %}
 Install a model from the Coqui STT Model zoo to get started.

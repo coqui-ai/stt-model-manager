@@ -9,7 +9,7 @@ from collections import deque
 from datetime import datetime, timedelta
 from pathlib import Path
 from queue import SimpleQueue
-from typing import Tuple
+from typing import Optional, Tuple
 
 import numpy as np
 from engineio.payload import Payload
@@ -72,8 +72,8 @@ def index():
 
 @app.route("/install_model", methods=["POST"])
 def install_model():
+    print(f"Install model got data: {request.data}")
     model_card = json.loads(request.data)
-    print(f"Install model got data: {json.dumps(model_card)}")
     app.config["MODEL_MANAGER"].download_model(model_card)
     return redirect(url_for("index"))
 
@@ -255,12 +255,20 @@ def transcribe_with_model(model_name: str):
     )
 
 
-def build_app(host: str = "127.0.0.1", port: int = 38450):
+def build_app(
+    host: str = "127.0.0.1",
+    port: int = 38450,
+    testing: bool = False,
+    install_dir: Optional[Path] = None,
+):
     if not is_debug():
         werkzeug_log = logging.getLogger("werkzeug")
         werkzeug_log.setLevel(logging.ERROR)
 
-    app.config["MODEL_MANAGER"] = ModelManager()
+    if testing:
+        app.config["TESTING"] = True
+
+    app.config["MODEL_MANAGER"] = ModelManager(install_dir)
     app.config["SERVER_HOST"] = host
     app.config["SERVER_PORT"] = port
     app.secret_key = b"aeiou"

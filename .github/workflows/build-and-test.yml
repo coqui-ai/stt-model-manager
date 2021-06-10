@@ -43,3 +43,18 @@ jobs:
           make install
       - run: |
           make frontend_tests
+  backend-tests:
+    name: Backend tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: |
+          make install_test
+      - run: |
+          make backend_tests
