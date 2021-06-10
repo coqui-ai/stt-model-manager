@@ -9,6 +9,7 @@ defaults:
 jobs:
   build-package:
     runs-on: ubuntu-20.04
+    if: github.repository == "coqui-ai/stt-model-manager"
     steps:
       - uses: actions/checkout@v2
       - name: Verify tag matches version
