@@ -15,10 +15,19 @@ package: react_build # build Python package
 	python -m build
 
 dev_install: react_build
-	python -m pip install -e .
+	python -m pip install -e ".[test]"
 
 install: react_build
 	python -m pip install .
 
+install_test: react_build
+	python -m pip install ".[test]"
+
 install_pre_commit_hooks: .pre-commit-config.yaml
 	python .pre-commit-2.13.0.pyz install
+
+frontend_tests:
+	yarn run test:client
+
+backend_tests:
+	pytest

@@ -159,8 +159,10 @@ class ModelManager:
     model from the Coqui Model Zoo.
     """
 
-    def __init__(self):
-        self.install_dir = Path(xdg.save_data_path(Path("coqui") / "models"))
+    def __init__(self, install_dir: Optional[Path] = None):
+        self.install_dir = Path(
+            install_dir or xdg.save_data_path(Path("coqui") / "models")
+        )
         self.model_index_path = self.install_dir / Path("models.json")
         if self.model_index_path.exists():
             self.read_index_from_disk()
@@ -168,7 +170,7 @@ class ModelManager:
             self.installed_models = ModelIndex()
             self.persist_index_to_disk()
         print(f"Installed models: {self.installed_models}")
-        self.install_tasks = {}
+        self.install_tasks: Dict[str, ModelInstallTask] = {}
 
     def read_index_from_disk(self):
         with open(self.model_index_path) as fin:
