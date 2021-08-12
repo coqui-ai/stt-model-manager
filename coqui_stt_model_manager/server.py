@@ -64,7 +64,7 @@ def index():
     print(f"Current installs: {current_installs}")
     return render_template(
         "index.html",
-        model_zoo_url=f"http://coqui.ai/models?callback_url=http://{host}:{port}/install_model",
+        model_zoo_url=f"http://coqui.ai/models?callback_url=http://{host}:{port}/install_model&prefer_tflite=1",
         installed_models=list(app.config["MODEL_MANAGER"].list_models()),
         models_being_installed=current_installs,
     )
