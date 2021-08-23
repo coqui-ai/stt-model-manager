@@ -1,5 +1,7 @@
 import json
 import math
+import os
+import shutil
 import urllib.parse
 import uuid
 from dataclasses import dataclass, field
@@ -43,6 +45,11 @@ class ModelIndex(Coqpit):
 
 
 def _download_one(url: str, dest_path: Path):
+    if dest_path.exists():
+        yield 100
+        print("Skipped, file already exists")
+        return
+
     response = requests.get(url, stream=True)
     total_length = response.headers.get("Content-Length")
 
@@ -199,6 +206,12 @@ class ModelManager:
         for install_id, task in self.install_tasks.items():
             yield task.model_card.name, task.total_progress, str(install_id)
 
+    def uninstall_model(self, model_name):
+        self.installed_models.models = [
+            m for m in self.installed_models.models if m.name != model_name
+        ]
+        self.persist_index_to_disk()
+
     def download_model(self, model_card: dict):
         """Download model files given an object specifying the file locations.
         Model card is in the format
@@ -262,3 +275,29 @@ class ModelManager:
         model_card.installed = True
         self.installed_models.models.append(model_card)
         self.persist_index_to_disk()
+
+    def maybe_upgrade_protobuf(self):
+        pbmm_models = [
+            m for m in self.list_models() if m.acoustic_path.endswith(".pbmm")
+        ]
+        if pbmm_models:
+            print(
+                f"Found {len(pbmm_models)} installed protobuf models, upgrading to TFLite if available or removing..."
+            )
+            for model in pbmm_models:
+                self.uninstall_model(model.name)
+                auto_fixed_acoustic = model.acoustic[: -len(".pbmm")] + ".tflite"
+                try:
+                    req = requests.head(auto_fixed_acoustic, allow_redirects=True)
+                    if req.status_code != 200:
+                        raise ValueError
+                    model.acoustic = auto_fixed_acoustic
+                    if os.path.exists(model.acoustic_path):
+                        os.remove(model.acoustic_path)
+                    self.download_model(model.to_dict())
+                except:  # pylint: disable=bare-except
+                    print(
+                        f"Couldn't automatically upgrade {model.name}, uninstalling..."
+                    )
+                    model_base_path = self.install_dir / model.name
+                    shutil.rmtree(model_base_path)

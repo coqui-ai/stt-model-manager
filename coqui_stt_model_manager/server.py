@@ -23,7 +23,7 @@ from .modelmanager import ModelCard, ModelManager
 
 Payload.max_decode_packets = 10000
 app = Flask(__name__)
-CORS(app, origins=["https://coqui.ai"])
+CORS(app, origins=["http://localhost:8000", "https://coqui.ai"])
 socketio = SocketIO(app)
 
 VAD = Vad(3)  # Very aggressive
@@ -64,7 +64,7 @@ def index():
     print(f"Current installs: {current_installs}")
     return render_template(
         "index.html",
-        model_zoo_url=f"http://coqui.ai/models?callback_url=http://{host}:{port}/install_model&prefer_tflite=1",
+        model_zoo_url=f"http://localhost:8000/models?callback_url=http://{host}:{port}/install_model&prefer_tflite=1",
         installed_models=list(app.config["MODEL_MANAGER"].list_models()),
         models_being_installed=current_installs,
     )
@@ -273,6 +273,10 @@ def build_app(
     app.config["SERVER_PORT"] = port
     app.secret_key = b"aeiou"
     _server_initialized.set()
+
+    # Migrations
+    app.config["MODEL_MANAGER"].maybe_upgrade_protobuf()
+
     return app
 
 

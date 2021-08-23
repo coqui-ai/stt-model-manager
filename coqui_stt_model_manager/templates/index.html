@@ -7,14 +7,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const models_being_installed = {{ models_being_installed|tojson }};
     console.log(`Models being installed: ${models_being_installed}`);
-    let shouldRefresh = false;
+    let shouldPollDownloadUpdates = false;
     for (const install of models_being_installed) {
         if (install.total_progress < 100) {
-            shouldRefresh = true;
+            shouldPollDownloadUpdates = true;
         }
     }
     if (models_being_installed.length > 0) {
-        function refresh() {
+        function pollDownloadUpdates() {
             fetch("/installs_progress")
             .then(response => response.json())
             .then(progressUpdate => {
@@ -32,19 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 if (shouldStop) {
                     console.log("Stopping");
-                    if (shouldRefresh) {
-                        console.log("Refreshing");
+                    if (shouldPollDownloadUpdates) {
+                        console.log("Reloading page");
                         setTimeout(() => {
                             window.location.replace("/");
                         }, 500);
                     }
                 } else {
-                    setTimeout(refresh, 1000);
+                    setTimeout(pollDownloadUpdates, 1000);
                 }
             });
         }
         console.log("Listening for installation progress...");
-        refresh();
+        pollDownloadUpdates();
     }
 });
 </script>
