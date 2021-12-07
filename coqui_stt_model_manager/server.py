@@ -8,7 +8,7 @@ import webbrowser
 from collections import deque
 from datetime import datetime, timedelta
 from pathlib import Path
-from queue import SimpleQueue
+from queue import Queue
 from typing import Optional, Tuple
 
 import numpy as np
@@ -135,7 +135,7 @@ class TranscriptionInstance(threading.Thread):
         self.recorded_chunks = 0
         self.silence_start = None
         self.silence_buffers: deque = _reset_silence_buffers()
-        self.queue: SimpleQueue = SimpleQueue()
+        self.queue: Queue = Queue()
 
     def process_data(self, data):
         self.queue.put(("data", data))
