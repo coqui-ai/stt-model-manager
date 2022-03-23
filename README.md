@@ -13,6 +13,14 @@ $ pip install coqui_stt_model_manager
 $ stt-model-manager
 ```
 
+On Raspberry Pi:
+
+```bash
+$ pip install https://github.com/coqui-ai/STT/releases/download/v1.3.0/stt-1.3.0-cp37-cp37m-linux_armv7l.whl
+$ pip install coqui_stt_model_manager
+$ stt-model-manager
+```
+
 # Build and install from source
 
 Build dependencies:
