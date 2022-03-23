@@ -4,6 +4,10 @@
 
 # Usage
 
+Dependencies:
+
+ - Python >= 3.7 (On Raspberry Pi, only Python 3.7 is supported)
+
 ```bash
 $ pip install coqui_stt_model_manager
 $ stt-model-manager
