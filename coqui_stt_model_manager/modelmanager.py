@@ -188,11 +188,12 @@ class ModelManager:
         else:
             self.installed_models = ModelIndex()
             self.persist_index_to_disk()
-        logging.debug(
-            f"Installed models: {self.list_models()}"
-            if self.list_models()
-            else "No installed models."
-        )
+        if not self.list_models():
+            logging.debug("No installed models.")
+        else:
+            logging.debug("Installed models:")
+            for model_card in self.list_models():
+                logging.debug(model_card.__repr__())
         self.install_tasks: Dict[str, ModelInstallTask] = {}
 
     def __repr__(self):
