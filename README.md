@@ -42,15 +42,7 @@ $ make install
 
 # Development installation (editable, with pre-commit hooks)
 
-```bash
-$ # Create and activate virtualenv:
-$ python -m venv /tmp/venv
-$ /tmp/venv/bin/activate
-$ # Install package in editable mode:
-$ make dev_install
-$ # Install pre-commit hooks for development:
-$ make install_pre_commit_hooks
-```
+See [`CONTRIBUTING`](./CONTRIBUTING.md)
 
 # Running in development mode (watching file changes and rebuilding automatically)
 
@@ -77,4 +69,5 @@ For now you have to reload the browser manually. We'd gladly welcome a PR adding
 ```bash
 $ make package
 $ ll dist/
+$ pip install dist/*.whl
 ```
