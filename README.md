@@ -1,5 +1,7 @@
 # Coqui STT Model manager
 
+![](./images/cover-1.png)
+
 🐸STT Model Manager is a tool for installing and trying out Coqui STT models from the [Coqui Model Zoo](https://coqui.ai/models/).
 
 # Usage
@@ -20,6 +22,8 @@ $ pip install https://github.com/coqui-ai/STT/releases/download/v1.3.0/stt-1.3.0
 $ pip install coqui_stt_model_manager
 $ stt-model-manager
 ```
+
+![](./images/cover-2.png)
 
 # Build and install from source
 
@@ -42,7 +46,7 @@ $ make install
 
 # Development installation (editable, with pre-commit hooks)
 
-See [`CONTRIBUTING`](./CONTRIBUTING.md)
+See [`CONTRIBUTING`](./CONTRIBUTING.md).
 
 # Running in development mode (watching file changes and rebuilding automatically)
 
