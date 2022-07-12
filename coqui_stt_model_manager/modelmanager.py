@@ -41,6 +41,9 @@ class ModelCard(Coqpit):  # pylint: disable=too-many-instance-attributes
     def is_installed(self) -> bool:
         return self.installed
 
+    def __repr__(self):
+        return f"{self.language}/{self.creator}/{self.version}/{self.name}"
+
 
 @dataclass
 class ModelIndex(Coqpit):
@@ -191,6 +194,9 @@ class ModelManager:
             else "No installed models."
         )
         self.install_tasks: Dict[str, ModelInstallTask] = {}
+
+    def __repr__(self):
+        return f"ModelManager:{self.model_index_path}"
 
     def read_index_from_disk(self):
         with open(self.model_index_path) as fin:
