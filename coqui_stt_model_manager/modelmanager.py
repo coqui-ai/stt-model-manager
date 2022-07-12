@@ -64,7 +64,7 @@ def _download_one(url: str, dest_path: Path):
             total_bytes = int(total_length)
             done_bytes = 0
             print(f"File is {total_bytes} bytes large for {url}, downloading...")
-            for chunk in response.iter_content(chunk_size=5 * 2 ** 20):
+            for chunk in response.iter_content(chunk_size=5 * 2**20):
                 done_bytes += len(chunk)
                 print(f"{done_bytes} out of {total_bytes} downloaded")
                 fout.write(chunk)
