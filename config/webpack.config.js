@@ -234,7 +234,7 @@ module.exports = function(webpackEnv) {
         }),
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
+          minimizerOptions: {
             parser: safePostCssParser,
             map: shouldUseSourceMap
               ? {
@@ -247,7 +247,7 @@ module.exports = function(webpackEnv) {
                 }
               : false,
           },
-          cssProcessorPluginOptions: {
+          minimizerOptions: {
             preset: ['default', { minifyFontValues: { removeQuotes: false } }],
           },
         }),
