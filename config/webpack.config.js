@@ -23,6 +23,12 @@ const {NODE_ENV, getClientEnvironment} = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 // const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const ESLintPlugin = require('eslint-webpack-plugin');
+
+const myEslintOptions = {
+  extensions: [`js`, `jsx`, `ts`, `tsx`, `mjs`],
+  exclude: [`node_modules`],
+};
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -188,46 +194,48 @@ module.exports = function(webpackEnv) {
       minimize: isEnvProduction,
       minimizer: [
         // This is only used in production mode
-        new TerserPlugin({
-          terserOptions: {
-            parse: {
+        new TerserPlugin(
+          //{
+          // terserOptions: {
+            // parse: {
               // We want terser to parse ecma 8 code. However, we don't want it
               // to apply any minification steps that turns valid ecma 5 code
               // into invalid ecma 5 code. This is why the 'compress' and 'output'
               // sections only apply transformations that are ecma 5 safe
               // https://github.com/facebook/create-react-app/pull/4234
-              ecma: 8,
-            },
-            compress: {
-              ecma: 5,
-              warnings: false,
+              // ecma: 8,
+            // },
+            // compress: {
+              // ecma: 5,
+              // warnings: false,
               // Disabled because of an issue with Uglify breaking seemingly valid code:
               // https://github.com/facebook/create-react-app/issues/2376
               // Pending further investigation:
               // https://github.com/mishoo/UglifyJS2/issues/2011
-              comparisons: false,
+              // comparisons: false,
               // Disabled because of an issue with Terser breaking valid code:
               // https://github.com/facebook/create-react-app/issues/5250
               // Pending further investigation:
               // https://github.com/terser-js/terser/issues/120
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
+              // inline: 2,
+            // },
+            // mangle: {
+              // safari10: true,
+            // },
             // Added for profiling in devtools
-            keep_classnames: isEnvProductionProfile,
-            keep_fnames: isEnvProductionProfile,
-            output: {
-              ecma: 5,
-              comments: false,
+            // keep_classnames: isEnvProductionProfile,
+            // keep_fnames: isEnvProductionProfile,
+            // output: {
+              // ecma: 5,
+              // comments: false,
               // Turned on because emoji and regex is not minified properly using default
               // https://github.com/facebook/create-react-app/issues/2488
-              ascii_only: true,
-            },
-          },
-          sourceMap: shouldUseSourceMap,
-        }),
+              //ascii_only: true,
+            // },
+          // },
+          // sourceMap: shouldUseSourceMap,
+        // }
+        ),
         new webpack.optimize.LimitChunkCountPlugin({
           // Limit output to 1 chunk
           maxChunks: 1
@@ -293,6 +301,8 @@ module.exports = function(webpackEnv) {
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+        // ESLintWebPackPlugin
+        new ESLintPlugin(myEslintOptions),
       ],
     },
     resolveLoader: {
@@ -313,18 +323,21 @@ module.exports = function(webpackEnv) {
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           enforce: 'pre',
-          use: [
-            {
-              options: {
-                cache: true,
-                formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                eslintPath: require.resolve('eslint'),
-                resolvePluginsRelativeTo: __dirname,
-
-              },
-              loader: require.resolve('eslint-webpack-plugin'),
-            },
-          ],
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          options: {
+            sourceType: 'unambiguous',
+          },
+          // use: [
+            // {
+              //options: {
+                // cache: true,
+                // formatter: require.resolve('react-dev-utils/eslintFormatter'),
+                // eslintPath: require.resolve('eslint'),
+                // resolvePluginsRelativeTo: __dirname,
+              //},
+            //},
+          // ],
           include: paths.appSrc,
         },
         {
@@ -349,6 +362,7 @@ module.exports = function(webpackEnv) {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
               loader: require.resolve('babel-loader'),
+              type: 'javascript/auto',
               options: {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
@@ -382,6 +396,7 @@ module.exports = function(webpackEnv) {
               test: /\.(js|mjs)$/,
               exclude: /@babel(?:\/|\\{1,2})runtime/,
               loader: require.resolve('babel-loader'),
+              type: 'javascript/auto',
               options: {
                 babelrc: false,
                 configFile: false,
@@ -500,7 +515,8 @@ module.exports = function(webpackEnv) {
       // It is absolutely essential that NODE_ENV is set to production
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.
-      new webpack.DefinePlugin(env.stringified),
+      // Default on webpack 5
+      //new webpack.DefinePlugin(env.stringified),
       // This is necessary to emit hot updates (currently CSS only):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // Watcher doesn't work well if you mistype casing in a path so we use
@@ -573,16 +589,18 @@ module.exports = function(webpackEnv) {
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
-    node: {
-      module: 'empty',
-      dgram: 'empty',
-      dns: 'mock',
-      fs: 'empty',
-      http2: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty',
-    },
+    //node: {
+    //  Buffer: false,
+    //  process: false,
+    //  module: 'empty',
+    //  dgram: 'empty',
+    //  dns: 'mock',
+    //  fs: 'empty',
+    //  http2: 'empty',
+    //  net: 'empty',
+    //  tls: 'empty',
+    //  child_process: 'empty',
+    //},
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
