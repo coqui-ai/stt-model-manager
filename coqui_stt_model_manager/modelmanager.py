@@ -1,4 +1,5 @@
 import json
+import logging
 import math
 import os
 import shutil
@@ -12,6 +13,8 @@ from typing import Dict, Iterator, List, Optional, Tuple
 import requests
 from coqpit import Coqpit
 from xdg import BaseDirectory as xdg
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 @dataclass
@@ -34,6 +37,13 @@ class ModelCard(Coqpit):  # pylint: disable=too-many-instance-attributes
         default=None, metadata={"help": "path to downloaded scorer, if available"}
     )
 
+    @property
+    def is_installed(self) -> bool:
+        return self.installed
+
+    def __repr__(self):
+        return f"{self.language}/{self.creator}/{self.version}/{self.name}"
+
 
 @dataclass
 class ModelIndex(Coqpit):
@@ -47,7 +57,7 @@ class ModelIndex(Coqpit):
 def _download_one(url: str, dest_path: Path):
     if dest_path.exists():
         yield 100
-        print("Skipped, file already exists")
+        logging.debug("Skipped, file already exists")
         return
 
     response = requests.get(url, stream=True)
@@ -55,23 +65,25 @@ def _download_one(url: str, dest_path: Path):
 
     with open(dest_path, "wb") as fout:
         if total_length is None:
-            print(f"Unknown download size for {url}. Downloading...")
+            logging.debug("Unknown download size for %s. Downloading...", url)
             yield 0
             fout.write(response.content)
             yield 100
-            print("Done")
+            logging.debug("Done")
         else:
             total_bytes = int(total_length)
             done_bytes = 0
-            print(f"File is {total_bytes} bytes large for {url}, downloading...")
+            logging.debug(
+                "File is %d bytes large for %s, downloading...", total_bytes, url
+            )
             for chunk in response.iter_content(chunk_size=5 * 2**20):
                 done_bytes += len(chunk)
-                print(f"{done_bytes} out of {total_bytes} downloaded")
+                logging.debug("%d out of %d downloaded", done_bytes, total_bytes)
                 fout.write(chunk)
                 done_pct = math.ceil((done_bytes / total_bytes) * 100)
                 yield done_pct
             yield 100
-            print("Done")
+            logging.debug("Done")
 
 
 class ModelInstallTask(Thread):  # pylint: disable=too-many-instance-attributes
@@ -176,8 +188,16 @@ class ModelManager:
         else:
             self.installed_models = ModelIndex()
             self.persist_index_to_disk()
-        print(f"Installed models: {self.installed_models}")
+        if not self.list_models():
+            logging.debug("No installed models.")
+        else:
+            logging.debug("Installed models:")
+            for model_card in self.list_models():
+                logging.debug(model_card.__repr__())
         self.install_tasks: Dict[str, ModelInstallTask] = {}
+
+    def __repr__(self):
+        return f"ModelManager:{self.model_index_path}"
 
     def read_index_from_disk(self):
         with open(self.model_index_path) as fin:
@@ -188,7 +208,7 @@ class ModelManager:
             fout.write(self.installed_models.to_json())
 
     def list_models(self) -> List[ModelCard]:
-        return self.installed_models.models
+        return [m for m in self.installed_models.models if m.is_installed]
 
     def models_dict(self) -> Dict[str, ModelCard]:
         return {m.name: m for m in self.installed_models.models}
@@ -260,7 +280,7 @@ class ModelManager:
             scorer_path=output_scorer,
         )
         self.set_install_task_state(install_id, install_task)
-        print("Starting install thread...")
+        logging.debug("Starting install thread...")
         install_task.start()
         return install_id
 
@@ -281,8 +301,9 @@ class ModelManager:
             m for m in self.list_models() if m.acoustic_path.endswith(".pbmm")
         ]
         if pbmm_models:
-            print(
-                f"Found {len(pbmm_models)} installed protobuf models, upgrading to TFLite if available or removing..."
+            logging.debug(
+                "Found %d installed protobuf models, upgrading to TFLite if available or removing...",
+                len(pbmm_models),
             )
             for model in pbmm_models:
                 self.uninstall_model(model.name)
@@ -296,8 +317,8 @@ class ModelManager:
                         os.remove(model.acoustic_path)
                     self.download_model(model.to_dict())
                 except:  # pylint: disable=bare-except
-                    print(
-                        f"Couldn't automatically upgrade {model.name}, uninstalling..."
+                    logging.warning(
+                        "Couldn't automatically upgrade %s, uninstalling...", model.name
                     )
                     model_base_path = self.install_dir / model.name
                     shutil.rmtree(model_base_path)
