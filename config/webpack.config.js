@@ -165,8 +165,6 @@ module.exports = function(webpackEnv) {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: 'static/js/bundle.min.js',
-      // TODO: remove this when upgrading to webpack 5
-      futureEmitAssets: true,
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
       // We inferred the "public path" (such as / or /my-project) from homepage.
