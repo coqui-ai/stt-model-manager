@@ -54,7 +54,7 @@
     "react-dev-utils": "^11.0.4",
     "react-dom": "^17.0.2",
     "resolve": "1.15.0",
-    "resolve-url-loader": "3.1.2",
+    "resolve-url-loader": "4.0.0",
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
     "should": "^13.2.3",
