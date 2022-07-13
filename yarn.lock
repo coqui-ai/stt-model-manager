@@ -3,6 +3,7 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -21,12 +22,16 @@
 =======
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.8.3":
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.8.3":
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
   integrity sha512-HV1Cm0Q3ZrpCR93tkWOYiuYIgLxZXZFVG2VgK+MBWjUqZTundupbfx2aXarXuw5Ko5aMcjtJgbSs4vUGBS5v6g==
   dependencies:
     "@babel/highlight" "^7.12.13"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 "@babel/code-frame@^7.14.5":
   version "7.14.5"
@@ -35,13 +40,18 @@
   dependencies:
     "@babel/highlight" "^7.14.5"
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 "@babel/code-frame@^7.16.0":
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.0.tgz#0dfc80309beec8411e65e706461c408b0bb9b431"
   integrity sha512-IF4EOMEV+bfYwOmNxGzSnjR2EmQod7f1UXOpZM3l4i4o4QNwzjtJAu/HxdjHq0aYBvdqMuQEY1eg0nqW9ZPORA==
   dependencies:
     "@babel/highlight" "^7.16.0"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 "@babel/compat-data@^7.13.11", "@babel/compat-data@^7.13.15", "@babel/compat-data@^7.13.8", "@babel/compat-data@^7.9.0":
   version "7.13.15"
@@ -405,11 +415,14 @@
   version "7.15.7"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.15.7.tgz#220df993bfe904a4a6b02ab4f3385a5ebf6e2389"
   integrity sha512-K4JvCtQqad9OY2+yTU8w+E82ywk/fe+ELNlt1G8z3bVGlZfn/hOcQQsUhGhW/N+tb3fxK800wLtKOE/aM0m72w==
+<<<<<<< HEAD
 
 "@babel/helper-validator-identifier@^7.14.5", "@babel/helper-validator-identifier@^7.14.9":
   version "7.14.9"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.14.9.tgz#6654d171b2024f6d8ee151bf2509699919131d48"
   integrity sha512-pQYxPY0UP6IHISRitNe8bsijHex4TWZXi2HwKVsjPiltzlhse2znVcm9Ace510VT1kxIHjGJCZZQBX2gJDbo0g==
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 "@babel/helper-validator-option@^7.12.17":
   version "7.12.17"
@@ -441,6 +454,7 @@
     "@babel/types" "^7.13.17"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@babel/helpers@^7.15.4":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.15.4.tgz#5f40f02050a3027121a3cf48d497c05c555eaf43"
@@ -461,6 +475,8 @@
 
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 "@babel/highlight@^7.12.13":
   version "7.13.10"
   resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.13.10.tgz#a8b2a66148f5b27d666b15d81774347a731d52d1"
@@ -471,6 +487,7 @@
     js-tokens "^4.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@babel/highlight@^7.14.5":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.14.5.tgz#6861a52f03966405001f6aa534a01a24d99e8cd9"
@@ -478,13 +495,18 @@
   dependencies:
     "@babel/helper-validator-identifier" "^7.14.5"
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 "@babel/highlight@^7.16.0":
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.16.0.tgz#6ceb32b2ca4b8f5f361fb7fd821e3fddf4a1725a"
   integrity sha512-t8MH41kUQylBtu2+4IQA3atqevA2lRgqA2wyVB/YiWmsDSuylZZuXOUy9ric30hfzauEFfdsuk/eXTRrGrfd0g==
   dependencies:
     "@babel/helper-validator-identifier" "^7.15.7"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
@@ -2091,11 +2113,14 @@
   integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@types/json-schema@^7.0.8":
   version "7.0.9"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
   integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 "@types/json-schema@^7.0.4":
   version "7.0.9"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
@@ -2491,6 +2516,7 @@ acorn@^7.1.1, acorn@^7.4.0:
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acorn@^8.2.4:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.5.0.tgz#4512ccb99b3698c752591e9bb4472e38ad43cee2"
@@ -2500,6 +2526,9 @@ address@1.1.2, address@^1.0.1:
 =======
 address@^1.0.1, address@^1.1.2:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+address@^1.0.1, address@^1.1.2:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/address/-/address-1.1.2.tgz#bf1116c9c758c51b7a933d296b72c221ed9428b6"
   integrity sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA==
@@ -2543,10 +2572,14 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.4.1, ajv-keywords@^3.5.2:
   integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
 =======
 ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.12.4:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.12.4:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
@@ -2636,6 +2669,7 @@ ansi-regex@^5.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ansi-regex@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-6.0.0.tgz#ecc7f5933cbe5ac7b33e209a5ff409ab1669c6b2"
@@ -2652,14 +2686,19 @@ ansi-regex@^6.0.1:
 =======
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-c19a53460d2ce173061c4e1b6ff8d0f6
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 ansi-styles@^3.2.0, ansi-styles@^3.2.1:
 =======
@@ -2695,6 +2734,7 @@ anymatch@^2.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 anymatch@~3.1.1, anymatch@~3.1.2:
 =======
 anymatch@^3.0.3, anymatch@~3.1.1, anymatch@~3.1.2:
@@ -2705,6 +2745,9 @@ anymatch@~3.1.1, anymatch@~3.1.2:
 =======
 anymatch@~3.1.1, anymatch@~3.1.2:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+anymatch@~3.1.1, anymatch@~3.1.2:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-3.1.2.tgz#c0557c096af32f106198f4f4e2a383537e378716"
   integrity sha512-P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==
@@ -3406,6 +3449,7 @@ browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 browserslist@^4.16.0, browserslist@^4.16.6:
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.6.tgz#d7901277a5a88e554ed305b183ec9b0c08f66fa2"
@@ -3435,6 +3479,8 @@ browserslist@^4.16.0, browserslist@^4.16.6:
 =======
 >>>>>>> origin/snyk-fix-04251e2629484395f1cb5c8d7a12f891
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 browserslist@^4.18.1:
   version "4.19.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.19.1.tgz#4ac0435b35ab655896c31d53018b6dd5e9e4c9a3"
@@ -3445,7 +3491,10 @@ browserslist@^4.18.1:
     escalade "^3.1.1"
     node-releases "^2.0.1"
     picocolors "^1.0.0"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 bser@2.1.1:
   version "2.1.1"
@@ -3629,6 +3678,7 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, can
   integrity sha512-O2/SCpuaU3eASWVaesQirZv1MSjUNOvmugaD8zNSJqw6Vv5SGwoOpA9LJs3pNPfM745nxqPvfZY3MQKY4AKHYg==
 
 caniuse-lite@^1.0.30001286:
+<<<<<<< HEAD
   version "1.0.30001286"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001286.tgz#3e9debad420419618cfdf52dc9b6572b28a8fff6"
   integrity sha512-zaEMRH6xg8ESMi2eQ3R4eZ5qw/hJiVsO/HlLwniIwErij0JDr9P+8V4dtx1l+kLq6j3yy8l8W4fst1lBnat5wQ==
@@ -3651,6 +3701,11 @@ caniuse-lite@^1.0.30001254:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001258.tgz#b604eed80cc54a578e4bf5a02ae3ed49f869d252"
   integrity sha512-RBByOG6xWXUp0CR2/WU2amXz3stjKpSl5J1xU49F1n2OxD//uBZO4wCKUiG+QMGf7CHGfDDcqoKriomoGVxTeA==
 >>>>>>> origin/snyk-fix-04251e2629484395f1cb5c8d7a12f891
+=======
+  version "1.0.30001287"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001287.tgz#5fab6a46ab9e47146d5dd35abfe47beaf8073c71"
+  integrity sha512-4udbs9bc0hfNrcje++AxBuc6PfLNHwh3PO9kbwnfCQWyqtlzg3py0YgFu8jyRTTo85VAz4U+VLxSlID09vNtWA==
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -3695,10 +3750,14 @@ chai@^4.2.0:
     type-detect "^4.0.5"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.0.1, chalk@^2.4.1, chalk@^2.4.2:
 =======
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.1, chalk@^2.4.2:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.1, chalk@^2.4.2:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -3724,11 +3783,14 @@ chalk@^4.0.0, chalk@^4.1.0:
     supports-color "^7.1.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char-regex@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
@@ -3815,6 +3877,21 @@ chokidar@^3.5.1:
     fsevents "~2.3.2"
 
 chokidar@^3.5.1:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
+  integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
+  dependencies:
+    anymatch "~3.1.2"
+    braces "~3.0.2"
+    glob-parent "~5.1.2"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.6.0"
+  optionalDependencies:
+    fsevents "~2.3.2"
+
+chokidar@^3.4.2:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
   integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
@@ -4041,11 +4118,14 @@ commander@^2.11.0, commander@^2.20.0:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 commander@^7.0.0, commander@^7.1.0:
 =======
 commander@^7.0.0, commander@^7.2.0:
 >>>>>>> origin/snyk-fix-04251e2629484395f1cb5c8d7a12f891
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 commander@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
@@ -4305,6 +4385,7 @@ create-react-app@^5.0.0:
   integrity sha512-r1hJymk28l9HiGNatNq92txdua5pq5z4jHsYRG4g2BME7cDtRcCiuUsZzT1tPqjapSHT0Zwpwnp0gdTaqPzyBA==
   dependencies:
 <<<<<<< HEAD
+<<<<<<< HEAD
     chalk "4.1.0"
     commander "4.1.1"
     cross-spawn "7.0.3"
@@ -4326,6 +4407,8 @@ cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
     chalk "^4.1.2"
     commander "^4.1.1"
     cross-spawn "^7.0.3"
@@ -4337,7 +4420,10 @@ cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     tar-pack "^3.4.1"
     tmp "^0.2.1"
     validate-npm-package-name "^3.0.0"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 cross-spawn@^6.0.0:
   version "6.0.5"
@@ -4781,14 +4867,18 @@ deep-is@~0.1.3:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 deepmerge@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
   integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> origin/snyk-fix-8d37fc681a4d943805b5d8a9b7a7570c
 default-gateway@^6.0.0:
@@ -4796,6 +4886,8 @@ default-gateway@^6.0.0:
   resolved "https://registry.yarnpkg.com/default-gateway/-/default-gateway-6.0.3.tgz#819494c888053bdb743edbf343d6cdf7f2943a71"
   integrity sha512-fwSOJsbbNzZ/CUFpqFBqYfYNLj1NbMPm8MMCIzHjC83iSJRBEGmDUxU+WP661BaBQImeC2yHwXtz+P/O9o+XEg==
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 default-gateway@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/default-gateway/-/default-gateway-4.2.0.tgz#167104c7500c2115f6dd69b0a536bb8ed720552b"
@@ -5138,6 +5230,7 @@ electron-to-chromium@^1.3.712:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 electron-to-chromium@^1.3.723:
   version "1.3.759"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.759.tgz#b0d652d376831470a4c230ba721da2427bfb996a"
@@ -5160,6 +5253,12 @@ electron-to-chromium@^1.4.17:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.18.tgz#2fb282213937986a20a653315963070e8321b3f3"
   integrity sha512-i7nKjGGBE1+YUIbfLObA1EZPmN7J1ITEllbhusDk+KIk6V6gUxN9PFe36v+Sd+8Cg0k3cgUv9lQhQZalr8rggw==
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+electron-to-chromium@^1.4.17:
+  version "1.4.20"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.20.tgz#8fbf9677ccac19b4249c0a6204e0943d9d66ce30"
+  integrity sha512-N7ZVNrdzX8NE90OXEFBMsBf3fp8P/vVDUER3WCUZjzC7OkNTXHVoF6W9qVhq8+dA8tGnbDajzUpj2ISNVVyj+Q==
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 elliptic@^6.5.3:
   version "6.5.4"
@@ -5340,7 +5439,10 @@ es6-symbol@^3.1.1, es6-symbol@~3.1.3:
     ext "^1.1.2"
 
 escalade@^3.1.1:
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
@@ -5359,11 +5461,15 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.5:
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
 escape-string-regexp@^2.0.0:
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
   integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 escape-string-regexp@4.0.0, escape-string-regexp@^4.0.0:
@@ -5373,10 +5479,14 @@ escape-string-regexp@4.0.0:
 =======
 escape-string-regexp@^4.0.0:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+escape-string-regexp@^4.0.0:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 escape-string-regexp@^1.0.5:
   version "1.0.5"
@@ -5388,6 +5498,8 @@ escodegen@^1.11.0:
 =======
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 escodegen@^1.11.0, escodegen@^1.9.1:
 >>>>>>> origin/snyk-fix-c19a53460d2ce173061c4e1b6ff8d0f6
   version "1.14.3"
@@ -5955,6 +6067,7 @@ find-cache-dir@^3.3.1:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 find-up@4.1.0, find-up@^4.0.0, find-up@^4.1.0:
 =======
 find-up@4.1.0, find-up@^4.0.0:
@@ -5974,13 +6087,18 @@ find-up@5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 find-up@3.0.0, find-up@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-3.0.0.tgz#49169f1d7993430646da61ecc5ae355c21c97b73"
   integrity sha512-1yD6RmLI1XBfxugvORwlck6f75tYL+iR0jqwsOrOxMZyGYqUuDhJ0l4AXdO1iX/FTs9cBAMEk1gWSEx1kSbylg==
   dependencies:
     locate-path "^3.0.0"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 find-up@^1.0.0:
   version "1.1.2"
@@ -5998,6 +6116,7 @@ find-up@^2.0.0, find-up@^2.1.0:
     locate-path "^2.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 find-up@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-3.0.0.tgz#49169f1d7993430646da61ecc5ae355c21c97b73"
@@ -6007,6 +6126,8 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 find-up@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"
@@ -6022,7 +6143,10 @@ find-up@^5.0.0:
   dependencies:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 flat-cache@^2.0.1:
   version "2.0.1"
@@ -6264,6 +6388,7 @@ fsevents@^1.2.7:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 fsevents@~2.3.1, fsevents@~2.3.2:
 =======
 fsevents@^2.1.2, fsevents@~2.3.1, fsevents@~2.3.2:
@@ -6274,6 +6399,9 @@ fsevents@~2.3.1, fsevents@~2.3.2:
 =======
 fsevents@~2.3.1, fsevents@~2.3.2:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+fsevents@~2.3.1, fsevents@~2.3.2:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
@@ -6383,6 +6511,7 @@ glob-parent@^3.1.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@~5.1.0, glob-parent@~5.1.2:
 =======
 glob-parent@^5.1.0, glob-parent@^5.1.2, glob-parent@~5.1.0, glob-parent@~5.1.2:
@@ -6393,6 +6522,9 @@ glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@~5.1.0, glob-parent@~5.1.2:
 =======
 glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@~5.1.0, glob-parent@~5.1.2:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@~5.1.0, glob-parent@~5.1.2:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
   integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
@@ -7443,10 +7575,14 @@ is-wsl@^1.1.0:
   integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 is-wsl@^2.1.1, is-wsl@^2.2.0:
 =======
 is-wsl@^2.2.0:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+is-wsl@^2.2.0:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-2.2.0.tgz#74a4c76e77ca9fd3f932f290c17ea326cd157271"
   integrity sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==
@@ -8385,6 +8521,7 @@ loader-runner@^2.4.0:
   integrity sha512-Jsmr89RcXGIwivFY21FcRrisYZfvLMTWx5kOLc+JTxtpBOG6xML0vzbc6SEQG2FO9/4Fc3wW4LVcB5DmGflaRw==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 loader-utils@2.0.0, loader-utils@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.0.tgz#e4cace5b816d425a166b5f097e10cd12b36064b0"
@@ -8394,6 +8531,8 @@ loader-utils@2.0.0, loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 loader-utils@1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.2.3.tgz#1ff5dc6911c9f0a062531a4c04b609406108c2c7"
@@ -8402,7 +8541,10 @@ loader-utils@1.2.3:
     big.js "^5.2.2"
     emojis-list "^2.0.0"
     json5 "^1.0.1"
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4.0:
   version "1.4.0"
@@ -8649,6 +8791,7 @@ media-typer@0.3.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 mem@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/mem/-/mem-8.1.1.tgz#cf118b357c65ab7b7e0817bdf00c8062297c0122"
@@ -8673,11 +8816,16 @@ memfs@^3.2.2:
 =======
 >>>>>>> origin/snyk-fix-8d37fc681a4d943805b5d8a9b7a7570c
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 memfs@^3.1.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/memfs/-/memfs-3.4.0.tgz#8bc12062b973be6b295d4340595736a656f0a257"
   integrity sha512-o/RfP0J1d03YwsAxyHxAYs2kyJp55AFkMazlFAZFR2I2IXkxiUTXRabJ6RmNNCQ83LAD2jy52Khj0m3OffpNdA==
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   dependencies:
     fs-monkey "1.0.3"
 
@@ -9142,14 +9290,19 @@ node-notifier@^8.0.0:
     is-wsl "^2.2.0"
     semver "^7.3.2"
     shellwords "^0.1.1"
+<<<<<<< HEAD
     uuid "^8.3.0"
     which "^2.0.2"
+=======
+    which "^1.3.0"
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 node-releases@^1.1.71:
   version "1.1.71"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.71.tgz#cb1334b179896b1c89ecfdd4b725fb7bbdfc7dbb"
   integrity sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 node-releases@^1.1.75:
   version "1.1.75"
@@ -9160,12 +9313,17 @@ node-releases@^1.1.75:
 normalize-package-data@^2.3.2, normalize-package-data@^2.5.0:
 =======
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 node-releases@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.1.tgz#3d1d395f204f1f2f29a54358b9fb678765ad2fc5"
   integrity sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==
 
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 normalize-package-data@^2.3.2:
 >>>>>>> origin/snyk-fix-04251e2629484395f1cb5c8d7a12f891
   version "2.5.0"
@@ -9529,11 +9687,14 @@ p-locate@^4.1.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> origin/snyk-fix-c19a53460d2ce173061c4e1b6ff8d0f6
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 p-locate@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-5.0.0.tgz#83c8315c6785005e3bd021839411c9e110e6d834"
@@ -9542,9 +9703,12 @@ p-locate@^5.0.0:
     p-limit "^3.0.2"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 
 p-map@^2.0.0:
   version "2.1.0"
@@ -11530,6 +11694,7 @@ semver@7.0.0:
   integrity sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 semver@7.3.2:
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.2.tgz#604962b052b81ed0786aae84389ffba70ffd3938"
@@ -11539,6 +11704,9 @@ semver@^7.2.1, semver@^7.3.2:
 =======
 semver@^7.3.2, semver@^7.3.5:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+semver@^7.3.2, semver@^7.3.5:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "7.3.5"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.5.tgz#0b621c879348d8998e4b0e4be94b3f12e6018ef7"
   integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
@@ -12194,6 +12362,7 @@ stringify-object@^3.3.0:
     is-regexp "^1.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 strip-ansi@6.0.0, strip-ansi@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
@@ -12203,6 +12372,8 @@ strip-ansi@6.0.0, strip-ansi@^6.0.0:
 
 strip-ansi@^3.0.0:
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 strip-ansi@^3.0.0, strip-ansi@^3.0.1:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
   version "3.0.1"
@@ -12239,6 +12410,20 @@ strip-ansi@^7.0.0:
   dependencies:
     ansi-regex "^6.0.1"
 >>>>>>> origin/snyk-fix-ddeb1670433a305a4920931dd8c220cb
+
+strip-ansi@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
+  integrity sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
+  dependencies:
+    ansi-regex "^5.0.0"
 
 strip-ansi@^6.0.1:
   version "6.0.1"
@@ -12530,6 +12715,7 @@ test-exclude@^5.2.3:
     require-main-filename "^2.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 test-exclude@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-6.0.0.tgz#04a8698661d805ea6fa293b6cb9e63ac044ef15e"
@@ -12543,6 +12729,9 @@ text-table@0.2.0, text-table@^0.2.0:
 =======
 text-table@^0.2.0:
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+text-table@^0.2.0:
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
@@ -12586,8 +12775,11 @@ timsort@^0.3.0:
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 tmp@0.2.1:
 =======
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -12596,7 +12788,10 @@ tmp@^0.0.33:
     os-tmpdir "~1.0.2"
 
 tmp@^0.2.1:
+<<<<<<< HEAD
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.2.1.tgz#8457fc3037dcf4719c251367a1af6500ee1ccf14"
   integrity sha512-76SUhtfqR2Ijn+xllcI5P1oyannHNHByD80W1q447gU3mp9G9PSpGdWmjUOHRDPiHYacIk66W7ubDTuPF3BEtQ==
@@ -13534,6 +13729,7 @@ worker-farm@^1.7.0:
     errno "~0.1.7"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 worker-rpc@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/worker-rpc/-/worker-rpc-0.1.1.tgz#cb565bd6d7071a8f16660686051e969ad32f54d5"
@@ -13559,6 +13755,8 @@ workerpool@6.1.5:
 
 =======
 >>>>>>> origin/snyk-fix-759ca666591134e212a29a48bc76730c
+=======
+>>>>>>> origin/snyk-fix-c4cb209927e38221f541daa7982213ef
 wrap-ansi@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-5.1.0.tgz#1fd1f67235d5b6d0fee781056001bfb694c03b09"
