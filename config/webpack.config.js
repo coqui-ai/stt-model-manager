@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const resolve = require('resolve');
-const PnpWebpackPlugin = require('pnp-webpack-plugin');
+// const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -294,7 +294,7 @@ module.exports = function(webpackEnv) {
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
-        PnpWebpackPlugin,
+        // PnpWebpackPlugin,
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
@@ -305,13 +305,14 @@ module.exports = function(webpackEnv) {
         new ESLintPlugin(myEslintOptions),
       ],
     },
-    resolveLoader: {
-      plugins: [
+    // resolveLoader: {
+      // plugins: [
         // Also related to Plug'n'Play, but this time it tells webpack to load its loaders
         // from the current package.
-        PnpWebpackPlugin.moduleLoader(module),
-      ],
-    },
+        // added with webpack 5
+        // PnpWebpackPlugin.moduleLoader(module),
+      // ],
+    // },
     module: {
       strictExportPresence: true,
       rules: [
