@@ -1,6 +1,11 @@
 # Coqui STT Model manager
 
-![](./images/cover-1.png)
+
+> **Note**
+> 
+> This project is no longer actively maintained, and we have stopped hosting the online Model Zoo. We've seen focus shift towards newer STT models such as [Whisper](https://github.com/openai/whisper), and have ourselves focused on [Coqui TTS](https://github.com/coqui-ai/TTS) and [Coqui Studio](https://coqui.ai/).
+> 
+> The models will remain available in [the releases of the coqui-ai/STT-models repo](https://github.com/coqui-ai/STT-models/releases).
 
 🐸STT Model Manager is a tool for installing and trying out Coqui STT models from the [Coqui Model Zoo](https://coqui.ai/models/).
 
